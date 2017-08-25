@@ -5,14 +5,12 @@
  */
 package br.unicamp.si400.valor;
 
-
 /**
  *
  * @author Kaulitz
  */
-
-
-public class RendaMensal extends Valor {
+public class SobraRendaMensal extends Valor{
+    
     private final String mes;
 
     /**
@@ -23,14 +21,20 @@ public class RendaMensal extends Valor {
     public String getMes() {
         return mes;
     }
-    public RendaMensal(long numeroValor, String tipo, String mes) {
+
+    /**
+     * Class constructor
+     * 
+     * @param numeroValor
+     * @param tipo 
+     * @param mes 
+     */
+    public SobraRendaMensal(long numeroValor, String tipo, String mes) {
         super(numeroValor, tipo);
-        this.mes = mes;
+         this.mes = mes;
+        
     }
     
-   
-    
-
     
     
 }

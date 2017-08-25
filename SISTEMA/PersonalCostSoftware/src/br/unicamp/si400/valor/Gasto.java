@@ -5,27 +5,30 @@
  */
 package br.unicamp.si400.valor;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author Kaulitz
  */
 public class Gasto extends Valor {
-    
+
     private String descricao;
-    
+
     private String local;
-    
+
     private String formaDePagamento;
-    
+
+    private String dataDoGasto;
+
     /**
-     * 
+     *
      * @param descricao
      * @param local
      * @param formaDePagamento
      * @param numeroValor
-     * @param tipo 
+     * @param tipo
      */
-
     public Gasto(String descricao, String local, String formaDePagamento, long numeroValor, String tipo) {
         super(numeroValor, tipo);
         this.descricao = descricao;
@@ -33,8 +36,14 @@ public class Gasto extends Valor {
         this.formaDePagamento = formaDePagamento;
     }
 
-  
-    
+    /**
+     * Get the value of dataDoGasto
+     *
+     * @return the value of dataDoGasto
+     */
+    public String getDataDoGasto() {
+        return dataDoGasto;
+    }
 
     /**
      * Get the value of formaDePagamento
@@ -54,9 +63,6 @@ public class Gasto extends Valor {
         this.formaDePagamento = formaDePagamento;
     }
 
-    
-    
-
     /**
      * Get the value of local
      *
@@ -74,7 +80,6 @@ public class Gasto extends Valor {
     public void setLocal(String local) {
         this.local = local;
     }
-
 
     /**
      * Get the value of descricao
@@ -94,6 +99,4 @@ public class Gasto extends Valor {
         this.descricao = descricao;
     }
 
-    
-    
 }

@@ -5,6 +5,13 @@
  */
 package br.unicamp.si400.usuario;
 
+import br.unicamp.si400.login.Login;
+import br.unicamp.si400.valor.RendaMensal;
+import br.unicamp.si400.valor.SobraRendaMensal;
+import java.util.LinkedList;
+import br.unicamp.si400.valor.Gasto;
+
+
 /**
  *
  * @author Kaulitz
@@ -14,20 +21,105 @@ public class Usuario {
     private final String nome;
     
     private String email;
+    
+    private Login login;
+    
+    private RendaMensal rendaMensal;
+    
+    private SobraRendaMensal sobraRendaMensal;
+    
+    private LinkedList gastos = new LinkedList();
+
+    /**
+     * Get the value of gastos
+     *
+     * @return the value of gastos
+     */
+    public LinkedList getGastos() {
+        return gastos;
+    }
+
+    /**
+     * Set the value of gastos
+     *
+     * @param gasto
+     * 
+     */
+    public void setGastos(Gasto gasto) {
+        this.gastos.add(gasto);
+    }
+
+    
+  
+
+    /**
+     * Get the value of sobraRendaMensal
+     *
+     * @return the value of sobraRendaMensal
+     */
+    public SobraRendaMensal getSobraRendaMensal() {
+        return sobraRendaMensal;
+    }
+
+    /**
+     * Set the value of sobraRendaMensal
+     *
+     * @param sobraRendaMensal new value of sobraRendaMensal
+     */
+    public void setSobraRendaMensal(SobraRendaMensal sobraRendaMensal) {
+        this.sobraRendaMensal = sobraRendaMensal;
+    }
+
+
+    /**
+     * Get the value of rendaMensal
+     *
+     * @return the value of rendaMensal
+     */
+    public RendaMensal getRendaMensal() {
+        return rendaMensal;
+    }
+    
+    
+
+    /**
+     * Set the value of rendaMensal
+     *
+     * @param rendaMensal new value of rendaMensal
+     */
+    public void setRendaMensal(RendaMensal rendaMensal) {
+        this.rendaMensal = rendaMensal;
+    }
+
+
+    /**
+     * Get the object Login
+     *
+     * @return the login user
+     */
+    public Login getLogin() {
+        return login;
+    }
+
+ 
+
     /**
      * Class constructor
      * 
      * @param nome
      * @param email 
+     * @param username 
+     * @param senha 
      */
 
-    public Usuario(String nome, String email) {
+    public Usuario(String nome, String email, String username, String senha) {
         this.nome = nome;
         this.email = email;
+        this.login = new Login(username,senha);
     }
-    
-    
 
+   
+    
     /**
      * Get the value of email
      *

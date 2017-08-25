@@ -28,6 +28,10 @@ public class Login {
         this.username = username;
         this.senha = senha;
     }
+
+    public Login() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     /**
