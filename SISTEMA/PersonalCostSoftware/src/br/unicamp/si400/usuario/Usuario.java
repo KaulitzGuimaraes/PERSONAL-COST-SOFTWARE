@@ -148,7 +148,10 @@ public class Usuario {
         return nome;
     }
     
-    
+    @Override
+    public String toString(){
+       return this.email;
+    }
 
     
 }
