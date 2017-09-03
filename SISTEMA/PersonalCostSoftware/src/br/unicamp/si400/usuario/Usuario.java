@@ -29,7 +29,6 @@ public class Usuario {
     private SobraRendaMensal sobraRendaMensal;
     
     private Map gastos = new HashMap();
-
     /**
      * Get the value of gastos
      *
@@ -39,18 +38,7 @@ public class Usuario {
         return gastos;
     }
 
-    /**
-     * Set the value of gastos
-     *
-     * @param gasto
-     * 
-     */
-    public void setGastos(Gasto gasto) {
-        this.gastos.put(gasto.getDescricao(), gasto);
-    }
-
     
-  
 
     /**
      * Get the value of sobraRendaMensal
@@ -150,8 +138,10 @@ public class Usuario {
     
     @Override
     public String toString(){
-       return this.email;
+       return this.getLogin().getUsername();
     }
+
+    
 
     
 }

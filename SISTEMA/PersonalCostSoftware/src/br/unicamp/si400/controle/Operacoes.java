@@ -17,9 +17,9 @@ public interface Operacoes {
     public void insert(String [] dados);
     /**
      * 
-     * @param chaveDelete
+     * @param dados
      */
-    public void delete(String chaveDelete);
+    public void delete(String [] dados);
     /**
      * 
      * @param dados 
