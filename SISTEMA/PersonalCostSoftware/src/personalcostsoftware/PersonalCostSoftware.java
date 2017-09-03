@@ -5,6 +5,8 @@
  */
 package personalcostsoftware;
 
+import br.unicamp.si400.usuario.Usuario;
+
 /**
  *
  * @author Kaulitz
@@ -12,15 +14,18 @@ package personalcostsoftware;
 public class PersonalCostSoftware {
 
    
-    
+ 
+   
 
     /**
-     * @param args the command line arguments
+     *
+     * @param args
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       PersonalCostSoftware test = new PersonalCostSoftware();
       
     }
+    
+   
     
 }

@@ -8,8 +8,8 @@ package br.unicamp.si400.usuario;
 import br.unicamp.si400.login.Login;
 import br.unicamp.si400.valor.RendaMensal;
 import br.unicamp.si400.valor.SobraRendaMensal;
-import java.util.LinkedList;
 import br.unicamp.si400.valor.Gasto;
+import java.util.*;
 
 
 /**
@@ -28,14 +28,14 @@ public class Usuario {
     
     private SobraRendaMensal sobraRendaMensal;
     
-    private LinkedList gastos = new LinkedList();
+    private Map gastos = new HashMap();
 
     /**
      * Get the value of gastos
      *
      * @return the value of gastos
      */
-    public LinkedList getGastos() {
+    public Map getGastos() {
         return gastos;
     }
 
@@ -46,7 +46,7 @@ public class Usuario {
      * 
      */
     public void setGastos(Gasto gasto) {
-        this.gastos.add(gasto);
+        this.gastos.put(gasto.getDescricao(), gasto);
     }
 
     
