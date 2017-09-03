@@ -22,8 +22,12 @@ public class PersonalCostSoftware {
      * @param args
      */
     public static void main(String[] args) {
+<<<<<<< HEAD
         // TODO code application logic here
       
+=======
+        // TODO code application logic here      
+>>>>>>> f13a70d6f43374c5fa38ae47080e53369cbba298
     }
     
    
