@@ -6,9 +6,7 @@
 package br.unicamp.si400.usuario;
 
 import br.unicamp.si400.login.Login;
-import br.unicamp.si400.valor.RendaMensal;
-import br.unicamp.si400.valor.SobraRendaMensal;
-import br.unicamp.si400.valor.Gasto;
+import br.unicamp.si400.valor.*;
 import java.util.*;
 
 
@@ -20,7 +18,7 @@ public class Usuario {
     
     private final String nome;
     
-    private String email;
+    private final String  email;
     
     private Login login;
     
@@ -96,14 +94,13 @@ public class Usuario {
      * 
      * @param nome
      * @param email 
-     * @param username 
      * @param senha 
      */
 
-    public Usuario(String nome, String email, String username, String senha) {
+    public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
-        this.login = new Login(username,senha);
+        this.login = new Login(senha);
     }
 
    
@@ -117,14 +114,7 @@ public class Usuario {
         return email;
     }
 
-    /**
-     * Set the value of email
-     *
-     * @param email new value of email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    
 
 
     /**
@@ -138,7 +128,7 @@ public class Usuario {
     
     @Override
     public String toString(){
-       return this.getLogin().getUsername();
+       return this.getEmail();
     }
 
     

@@ -5,33 +5,31 @@
  */
 package br.unicamp.si400.login;
 
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author Kaulitz
  */
 
-public class Login {
+public class Login implements LoginModel {
     
-    private final String username;
     
     private String senha;
+    private CriptografiaLogin criptoLogin;
     
     /**
      * Class constructor 
      * 
-     * @param username
      * @param senha 
+     * @throws java.security.NoSuchAlgorithmException 
      * 
      */
     
-    public Login(String username, String senha) {
-        this.username = username;
-        this.senha = senha;
+    public Login(String senha) throws NoSuchAlgorithmException {
+        criptoLogin = new CriptografiaLogin(senha); 
     }
 
-    public Login() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 
     /**
@@ -40,27 +38,27 @@ public class Login {
      * @return the value of senha
      */
     public String getSenha() {
-        return senha;
+        return criptoLogin.descriptografarStr();
     }
 
     /**
      * Set the value of senha
      *
      * @param senha new value of senha
+     * @throws java.security.NoSuchAlgorithmException
      */
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(String senha) throws NoSuchAlgorithmException {
+       criptoLogin = null;
+       criptoLogin = new CriptografiaLogin(senha) ;
     }
 
-
-    /**
-     * Get the value of username
-     *
-     * @return the value of username
-     */
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean verificaSenha(String senha) {
+        return this.senha.equals(getSenha());
     }
+    
+
+    
 
     
 }
