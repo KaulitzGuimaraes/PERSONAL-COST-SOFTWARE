@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class UsuariosDoSistema implements UsuarioModel{
     ArrayList <Usuario> listaDeUsuarios;
 
+    public UsuariosDoSistema() {
+        this.listaDeUsuarios = new ArrayList <Usuario>();
+    }
+
      public ArrayList getListaDeUsuarios() {
         return listaDeUsuarios;
     }
@@ -34,7 +38,7 @@ public class UsuariosDoSistema implements UsuarioModel{
     @Override
     public void novoUsuario(String dados[]) {
          if(!checarListaUsuario(dados[1])){
-             Usuario usuarioBuffer = new Usuario(dados[0],dados[1],dados[3]);
+             Usuario usuarioBuffer = new Usuario(dados[0],dados[1],dados[2]);
              listaDeUsuarios.add(usuarioBuffer);
          }else{
              System.err.println("Usuario ja existente");
@@ -87,17 +91,19 @@ public class UsuariosDoSistema implements UsuarioModel{
     }
 
     @Override
-    @SuppressWarnings("empty-statement")
     public String[] recuperarDadosUsuario(String dado) {
         int nUsuarios =getNumeroUsuarios();
         int i =0;
         String[] dados = new String[3];
          if(nUsuarios>0){
+             if(!(checarListaUsuario(dado))){
+             System.err.println("Usuario não existe");
+         }
              for (Usuario u :this.listaDeUsuarios){
                  if(u.getEmail().equals(dado) ){
                      dados[0] = Integer.toString(i);
-                     dados[1] = u.getEmail();
-                     dados[2] =u.getLogin().getSenha();
+                     dados[1] = u.getNome();
+                     dados[2] = u.getEmail();
                      return dados; 
                  }else{
                   i++;
@@ -105,10 +111,15 @@ public class UsuariosDoSistema implements UsuarioModel{
                  
              }
              
-         }
+         }else if(nUsuarios==0){
+                     System.out.println("Usuario não existe");
+                     
+                     }
         return null;
         
     }
+
+    
 
    
     

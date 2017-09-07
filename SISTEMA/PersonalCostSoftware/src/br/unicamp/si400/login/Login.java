@@ -16,7 +16,6 @@ public class Login implements LoginModel {
     
     
     private String senha;
-    private CriptografiaLogin criptoLogin;
     
     /**
      * Class constructor 
@@ -26,8 +25,8 @@ public class Login implements LoginModel {
      * 
      */
     
-    public Login(String senha) throws NoSuchAlgorithmException {
-        criptoLogin = new CriptografiaLogin(senha); 
+    public Login(String senha) {
+        this.senha = senha; 
     }
 
     
@@ -38,7 +37,7 @@ public class Login implements LoginModel {
      * @return the value of senha
      */
     public String getSenha() {
-        return criptoLogin.descriptografarStr();
+        return this.senha;
     }
 
     /**
@@ -47,9 +46,8 @@ public class Login implements LoginModel {
      * @param senha new value of senha
      * @throws java.security.NoSuchAlgorithmException
      */
-    public void setSenha(String senha) throws NoSuchAlgorithmException {
-       criptoLogin = null;
-       criptoLogin = new CriptografiaLogin(senha) ;
+    public void setSenha(String senha)  {
+       this.senha = senha ;
     }
 
     @Override
