@@ -11,4 +11,7 @@ package br.unicamp.si400.login;
  */
 public interface LoginModel {
     public boolean verificaSenha(String senha);
+    public void insereSenha(String senha);
+    public void modificaSenha(String senha);
+    public String esqueceuSenha();
 }

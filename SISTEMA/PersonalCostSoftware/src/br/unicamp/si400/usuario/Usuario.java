@@ -97,10 +97,9 @@ public class Usuario {
      * @param senha 
      */
 
-    public Usuario(String nome, String email, String senha) {
+    public Usuario(String nome, String email) {
         this.nome = nome;
         this.email = email;
-        this.login = new Login(senha);
     }
 
    

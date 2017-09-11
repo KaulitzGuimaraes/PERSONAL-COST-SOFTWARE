@@ -38,7 +38,7 @@ public class UsuariosDoSistema implements UsuarioModel{
     @Override
     public void novoUsuario(String dados[]) {
          if(!checarListaUsuario(dados[1])){
-             Usuario usuarioBuffer = new Usuario(dados[0],dados[1],dados[2]);
+             Usuario usuarioBuffer = new Usuario(dados[0],dados[1]);
              listaDeUsuarios.add(usuarioBuffer);
          }else{
              System.err.println("Usuario ja existente");
