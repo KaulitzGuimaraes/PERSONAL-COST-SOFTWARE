@@ -6,8 +6,7 @@
 package personalcostsoftware;
 
 
-import br.unicamp.si400.usuario.UsuariosDoSistema;
-import java.util.Arrays;
+import br.unicamp.si400.usuario.*;
 
 /**
  *
@@ -22,14 +21,29 @@ public class PersonalCostSoftware {
  
    
     public void teste(){
-             String novaSenha = "";
-        for (int i=0; i<4; i++){
-            Integer intBuffer = (int) (Math.random()*9);
-            novaSenha = novaSenha + intBuffer.toString();
-            System.out.println(novaSenha);
-        }
+        UsuariosDoSistema u = new  UsuariosDoSistema();
+        String[] dados = new String[2];
+        dados[0]= "Kau";
+        dados[1]= "kaulitz@hotmail";
+        if (u.create(dados)){
+        System.out.println("inseriu");
+        
     }
-    /**
+        dados[0]= "Kau";
+        dados[1]= "kaulitz@gmail";
+        if (u.create(dados)){
+        System.out.println("inseriu");
+        
+    }
+        dados[0]= "Kaulitz";
+        dados[1]= "kaulitz@gma";
+       //System.out.println(u.retrieve("kaulitz@gmail").getNome());
+       if(u.update(dados)){
+        System.out.println("atualizou");
+         System.out.println(u.retrieve("kaulitz@gma").getNome());
+       }
+    }
+    /**s
      *
      * @param args
      */

@@ -9,53 +9,30 @@ import br.unicamp.si400.login.Login;
 import br.unicamp.si400.valor.*;
 import java.util.*;
 
-
 /**
  *
  * @author Kaulitz
  */
 public class Usuario {
-    
-    private final String nome;
-    
-    private final String  email;
-    
+
+    private String nome;
+
+    private final String email;
+
     private Login login;
-    
+
     private RendaMensal rendaMensal;
-    
-    private SobraRendaMensal sobraRendaMensal;
-    
-    private Map gastos = new HashMap();
+
+    private listaGastos listagastos = new listaGastos();
+
     /**
      * Get the value of gastos
      *
      * @return the value of gastos
      */
-    public Map getGastos() {
-        return gastos;
+    public listaGastos getGastos() {
+        return this.listagastos;
     }
-
-    
-
-    /**
-     * Get the value of sobraRendaMensal
-     *
-     * @return the value of sobraRendaMensal
-     */
-    public SobraRendaMensal getSobraRendaMensal() {
-        return sobraRendaMensal;
-    }
-
-    /**
-     * Set the value of sobraRendaMensal
-     *
-     * @param sobraRendaMensal new value of sobraRendaMensal
-     */
-    public void setSobraRendaMensal(SobraRendaMensal sobraRendaMensal) {
-        this.sobraRendaMensal = sobraRendaMensal;
-    }
-
 
     /**
      * Get the value of rendaMensal
@@ -65,8 +42,6 @@ public class Usuario {
     public RendaMensal getRendaMensal() {
         return rendaMensal;
     }
-    
-    
 
     /**
      * Set the value of rendaMensal
@@ -77,7 +52,6 @@ public class Usuario {
         this.rendaMensal = rendaMensal;
     }
 
-
     /**
      * Get the object Login
      *
@@ -87,23 +61,18 @@ public class Usuario {
         return login;
     }
 
- 
-
     /**
      * Class constructor
-     * 
+     *
      * @param nome
-     * @param email 
-     * @param senha 
+     * @param email
      */
-
     public Usuario(String nome, String email) {
         this.nome = nome;
         this.email = email;
+        listagastos = new listaGastos();
     }
 
-   
-    
     /**
      * Get the value of email
      *
@@ -113,9 +82,6 @@ public class Usuario {
         return email;
     }
 
-    
-
-
     /**
      * Get the value of nome
      *
@@ -124,13 +90,55 @@ public class Usuario {
     public String getNome() {
         return nome;
     }
-    
-    @Override
-    public String toString(){
-       return this.getEmail();
+
+    /**
+     * Set username
+     *
+     * @param nome
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    
+    /**
+     * Return the user email
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return this.getEmail();
+    }
 
-    
+    /**
+     * Verify if the objects has the same email
+     *
+     * @param anObject
+     * @return
+     */
+    @Override
+    public boolean equals(Object anObject) {
+        if (anObject == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Usuario or not
+          "null instanceof [type]" also returns false */
+        if (!(anObject instanceof Usuario)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members 
+        String compare = anObject.toString();
+
+        // Compare the data members and return accordingly 
+        return this.toString().equals(compare);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.email);
+        return hash;
+    }
 }

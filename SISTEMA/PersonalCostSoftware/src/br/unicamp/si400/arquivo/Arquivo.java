@@ -9,7 +9,7 @@ import java.time.LocalDate;
  *
  * @author Kaulitz
  */
-public class Arquivo {
+public abstract class Arquivo {
     private final String name;
     
     private final String tipo;

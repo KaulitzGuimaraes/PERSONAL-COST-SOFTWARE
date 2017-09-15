@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Kaulitz
  */
-public class Valor {
+public abstract class Valor {
 
     private long numeroValor;
 

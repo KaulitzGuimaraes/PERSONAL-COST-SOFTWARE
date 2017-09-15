@@ -5,122 +5,131 @@
  */
 package br.unicamp.si400.usuario;
 
-import java.util.ArrayList;
+import br.unicamp.si400.crud.Crud;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  *
  * @author Kaulitz
  */
-public class UsuariosDoSistema implements UsuarioModel{
-    ArrayList <Usuario> listaDeUsuarios;
+public class UsuariosDoSistema implements Crud {
 
+    private Set<Usuario> listaDeUsuarios;
+    private Iterator<Usuario> iterator;
+    /**
+     * Initialize the Set listaDeUsuarios
+     */
     public UsuariosDoSistema() {
-        this.listaDeUsuarios = new ArrayList <Usuario>();
-    }
-
-     public ArrayList getListaDeUsuarios() {
-        return listaDeUsuarios;
-    }
-
-  
-    
-    public int getNumeroUsuarios(){
-        if (listaDeUsuarios.isEmpty()){
-            return 0;
-        }else{
-            return listaDeUsuarios.size();
-        }
-    }
-    /**
-     * 
-     * @param dados 
-     */
-    @Override
-    public void novoUsuario(String dados[]) {
-         if(!checarListaUsuario(dados[1])){
-             Usuario usuarioBuffer = new Usuario(dados[0],dados[1]);
-             listaDeUsuarios.add(usuarioBuffer);
-         }else{
-             System.err.println("Usuario ja existente");
-         }
-    }
-    /**
-     * 
-     * @param dado
-     * @return 
-     */
-    @Override
-    public boolean checarListaUsuario(String dado) {
-        int nUsuarios =getNumeroUsuarios();
-         if(nUsuarios>0){
-             for (Usuario u :this.listaDeUsuarios){
-                 if(u.getEmail().equals(dado) ){
-                     return true;
-                 }
-                 
-             }
-             
-         }
-        return false;
-    }
-    /**
-     * 
-     * @param dados 
-     */
-    @Override
-    public void atualizarDadosUsuario(String[] dados) {
-        String[] u  =recuperarDadosUsuario(dados[0]);
-       if(u != null){
-            this.listaDeUsuarios.get(Integer.parseInt(u[0])).getLogin().setSenha(dados[1]);
-            
-       }else{
-           System.err.println("Usuario não existe");
-       }
-    }
-
-    @Override
-    public void deletarUsuario(String[] dados) {
         
-        String[] u  =recuperarDadosUsuario(dados[0]);
-        if(u != null){
-            this.listaDeUsuarios.remove(Integer.parseInt(u[0]));
-            
-       }else{
-           System.err.println("Usuario não existe");
-       }
+        this.listaDeUsuarios = new HashSet();
+        
     }
+    
+    
+    
 
+    /**
+     * This method consists in receive a string array that should has the user
+     * name and email, then it will insert this values in the object Usuario and
+     * insert in the Collection, if the object isn't already there.
+     *
+     * @param data
+     * @return boolean
+     */
     @Override
-    public String[] recuperarDadosUsuario(String dado) {
-        int nUsuarios =getNumeroUsuarios();
-        int i =0;
-        String[] dados = new String[3];
-         if(nUsuarios>0){
-             if(!(checarListaUsuario(dado))){
-             System.err.println("Usuario não existe");
-         }
-             for (Usuario u :this.listaDeUsuarios){
-                 if(u.getEmail().equals(dado) ){
-                     dados[0] = Integer.toString(i);
-                     dados[1] = u.getNome();
-                     dados[2] = u.getEmail();
-                     return dados; 
-                 }else{
-                  i++;
+    public boolean create(String[] data) {//Datas into the string must to be name and email
+        Usuario usuarioBuffer = new Usuario(data[0], data[1]);
+        return this.listaDeUsuarios.add(usuarioBuffer);
+       
+    }
+    /**
+     * This method consists in receive an already made object,
+     * then it will insert this values in the object Usuario and
+     * insert in the Collection, if the object isn't already there.
+     *
+     * @param data
+     * @return boolean
+     */
+    public boolean create(Usuario  data) {//Datas into the string must to be name and email
+        return this.listaDeUsuarios.add(data);
+       
+    }
+    /**
+     * This method receive the email for the user and verifies if the user is there,
+     * so it retrieves the object Usuario .
+     * @param data
+     * @return Usuario
+     */
+    @Override
+    public Usuario retrieve(String data) {
+        
+         this.iterator = this.listaDeUsuarios.iterator();
+         Usuario usuarioBuffer;
+        
+            while (this.iterator.hasNext()) {
+                usuarioBuffer= this.iterator.next();
+                if(usuarioBuffer.toString().equals(data)){
+                    return usuarioBuffer;
                 }
-                 
-             }
-             
-         }else if(nUsuarios==0){
-                     System.out.println("Usuario não existe");
-                     
-                     }
+                
+                
+            }
         return null;
         
     }
-
     
-
-   
+    /**
+     * This method receives the email and the new user name,
+     * then it updates the object Usuario in the Set 
+     * listaDeUsuarios.
+     * @param data
+     * @return boolean
+     */
+    @Override
+    public boolean update(String[] data) {
+       
+        this.iterator = this.listaDeUsuarios.iterator();
+         Usuario usuarioBuffer = retrieve(data[1]);
+         
+          if(delete(data[1])){
+              usuarioBuffer.setNome(data[0]);
+              create(usuarioBuffer);
+              return true;
+          }
+              return false;
+          
+        
+          
+                
+            
     
+    }
+    /**
+     * This method consists in delete an object Usuario if the exists
+     * @param data
+     * @return boolean
+     */
+    @Override
+    public boolean delete(String data) {
+      this.iterator = this.listaDeUsuarios.iterator();
+        while (this.iterator.hasNext()) {
+            
+            
+                Usuario usuarioBuffer = iterator.next();
+       
+                
+                if (usuarioBuffer.toString().equals(data)) {
+                 
+                 
+                 
+                 return this.listaDeUsuarios.remove(usuarioBuffer);
+                }
+                
+           }
+        
+       return false;
+    }
+
 }
