@@ -54,15 +54,13 @@ ELICITAÇÃO DE REQUISITOS -  PERSONAL COST SOFTWARE (PCS)
 
 5.Gerar subtração entre a renda e o custo;
 
-6.Gerar gráficos mensalmente e anualmente;
+6.Operações matemáticas com os dados como soma, média, desvio padrão;
 
-7.Operações matemáticas com os dados como soma, média, desvio padrão;
+7.Segurança de dados;
 
-8.Segurança de dados;
+8.Login do usuário;
 
-9.Login do usuário;
+9.Ter mais de uma conta por sistema e
 
-10.Ter mais de uma conta por sistema e
-
-11.Não depender de  acesso à rede.
+10.Não depender de  acesso à rede.
 
