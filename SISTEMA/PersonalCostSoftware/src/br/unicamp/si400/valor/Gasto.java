@@ -5,21 +5,25 @@
  */
 package br.unicamp.si400.valor;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  *
  * @author Kaulitz
  */
 public class Gasto extends Valor {
 
-    private String descricao;
+    private final String descricao;
 
-    private String local;
+    private final String local;
 
-    private String formaDePagamento;
+    private final String formaDePagamento;
 
-    private String dataDoGasto;
+    private final String horaDoGasto;
+
+    private final String diaDoGasto;
+
+    private final String mesDoGasto;
+
+    private final String anoDoGasto;
 
     /**
      *
@@ -29,74 +33,43 @@ public class Gasto extends Valor {
      * @param numeroValor
      * @param tipo
      */
-    public Gasto(String descricao, String local, String formaDePagamento, long numeroValor, String tipo) {
+    Gasto(String descricao, String local, String formaDePagamento, String horaDoGasto, String diaDoGasto, String mesDoGasto, String anoDoGasto, double numeroValor, String tipo) {
         super(numeroValor, tipo);
         this.descricao = descricao;
         this.local = local;
         this.formaDePagamento = formaDePagamento;
+        this.horaDoGasto = horaDoGasto;
+        this.diaDoGasto = diaDoGasto;
+        this.mesDoGasto = mesDoGasto;
+        this.anoDoGasto = anoDoGasto;
     }
 
-    /**
-     * Get the value of dataDoGasto
-     *
-     * @return the value of dataDoGasto
-     */
-    public String getDataDoGasto() {
-        return dataDoGasto;
+    public String getHoraDoGasto() {
+        return horaDoGasto;
     }
 
-    /**
-     * Get the value of formaDePagamento
-     *
-     * @return the value of formaDePagamento
-     */
+    public String getDiaDoGasto() {
+        return diaDoGasto;
+    }
+
+    public String getMesDoGasto() {
+        return mesDoGasto;
+    }
+
+    public String getAnoDoGasto() {
+        return anoDoGasto;
+    }
+
     public String getFormaDePagamento() {
         return formaDePagamento;
     }
 
-    /**
-     * Set the value of formaDePagamento
-     *
-     * @param formaDePagamento new value of formaDePagamento
-     */
-    public void setFormaDePagamento(String formaDePagamento) {
-        this.formaDePagamento = formaDePagamento;
-    }
-
-    /**
-     * Get the value of local
-     *
-     * @return the value of local
-     */
     public String getLocal() {
         return local;
     }
 
-    /**
-     * Set the value of local
-     *
-     * @param local new value of local
-     */
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
-    /**
-     * Get the value of descricao
-     *
-     * @return the value of descricao
-     */
     public String getDescricao() {
         return descricao;
-    }
-
-    /**
-     * Set the value of descricao
-     *
-     * @param descricao new value of descricao
-     */
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
 }

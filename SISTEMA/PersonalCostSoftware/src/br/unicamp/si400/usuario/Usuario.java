@@ -17,20 +17,20 @@ public class Usuario {
 
     private String nome;
 
-    private final String email;
+    private  String email;
 
     private Login login;
 
     private RendaMensal rendaMensal;
 
-    private listaGastos listagastos = new listaGastos();
-
+    private ListaGastos listagastos = new ListaGastos();
+    
     /**
      * Get the value of gastos
      *
      * @return the value of gastos
      */
-    public listaGastos getGastos() {
+    public ListaGastos getGastos() {
         return this.listagastos;
     }
 
@@ -70,7 +70,7 @@ public class Usuario {
     public Usuario(String nome, String email) {
         this.nome = nome;
         this.email = email;
-        listagastos = new listaGastos();
+        listagastos = new ListaGastos();
     }
 
     /**
@@ -99,7 +99,14 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+     /**
+     * Set email
+     *
+     * @param email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
     /**
      * Return the user email
      *
@@ -109,7 +116,8 @@ public class Usuario {
     public String toString() {
         return this.getEmail();
     }
-
+   
+    
     /**
      * Verify if the objects has the same email
      *

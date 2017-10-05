@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Valor {
 
-    private long numeroValor;
+    private double numeroValor;
 
 
     private DateTimeFormatter data;
@@ -21,7 +21,7 @@ public abstract class Valor {
     private String tipo;
     
 
-    public Valor(long numeroValor, String tipo) {
+    public Valor(double numeroValor, String tipo) {
         this.numeroValor = numeroValor;
         this.tipo = tipo;
     }
@@ -57,7 +57,7 @@ public abstract class Valor {
      *
      * @return the value of numeroValor
      */
-    public long getNumeroValor() {
+    public double getNumeroValor() {
         return numeroValor;
     }
 
@@ -69,6 +69,10 @@ public abstract class Valor {
     public void setNumeroValor(long numeroValor) {
         this.numeroValor = numeroValor;
 
+    }
+    @Override
+    public String toString(){
+        return this.getTipo();
     }
 
 }

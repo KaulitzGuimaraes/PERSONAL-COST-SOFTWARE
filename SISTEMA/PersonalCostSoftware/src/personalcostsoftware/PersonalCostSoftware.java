@@ -25,22 +25,24 @@ public class PersonalCostSoftware {
         String[] dados = new String[2];
         dados[0]= "Kau";
         dados[1]= "kaulitz@hotmail";
-        if (u.create(dados)){
-        System.out.println("inseriu");
         
-    }
+        
+    
         dados[0]= "Kau";
         dados[1]= "kaulitz@gmail";
-        if (u.create(dados)){
+        u.create(dados);
         System.out.println("inseriu");
         
-    }
+    
         dados[0]= "Kaulitz";
-        dados[1]= "kaulitz@gma";
-       //System.out.println(u.retrieve("kaulitz@gmail").getNome());
-       if(u.update(dados)){
+        dados[1]= "kaulitz@gmai";
+      try{
+       if(u.update(dados))
         System.out.println("atualizou");
          System.out.println(u.retrieve("kaulitz@gma").getNome());
+       
+       }catch(NullPointerException e){
+           System.err.println("Usuario " + dados[1] + " Nao existe");
        }
     }
     /**s

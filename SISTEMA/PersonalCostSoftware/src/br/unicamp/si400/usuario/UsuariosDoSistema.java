@@ -9,6 +9,8 @@ import br.unicamp.si400.crud.Crud;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,19 +18,7 @@ import java.util.Set;
  */
 public class UsuariosDoSistema implements Crud {
 
-    private Set<Usuario> listaDeUsuarios;
-    private Iterator<Usuario> iterator;
-    /**
-     * Initialize the Set listaDeUsuarios
-     */
-    public UsuariosDoSistema() {
-        
-        this.listaDeUsuarios = new HashSet();
-        
-    }
-    
-    
-    
+    Usuario usuarioAtual;
 
     /**
      * This method consists in receive a string array that should has the user
@@ -40,96 +30,83 @@ public class UsuariosDoSistema implements Crud {
      */
     @Override
     public boolean create(String[] data) {//Datas into the string must to be name and email
-        Usuario usuarioBuffer = new Usuario(data[0], data[1]);
-        return this.listaDeUsuarios.add(usuarioBuffer);
-       
+        try {
+            this.usuarioAtual = new Usuario(data[0], data[1]);
+            return true;
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Nao foi possivel criar o login");
+
+        }
+
     }
+
     /**
-     * This method consists in receive an already made object,
-     * then it will insert this values in the object Usuario and
-     * insert in the Collection, if the object isn't already there.
+     * This method receive the email for the user and verifies if the user is
+     * there, so it retrieves the object Usuario .
      *
-     * @param data
-     * @return boolean
-     */
-    public boolean create(Usuario  data) {//Datas into the string must to be name and email
-        return this.listaDeUsuarios.add(data);
-       
-    }
-    /**
-     * This method receive the email for the user and verifies if the user is there,
-     * so it retrieves the object Usuario .
      * @param data
      * @return Usuario
      */
     @Override
     public Usuario retrieve(String data) {
-        
-         this.iterator = this.listaDeUsuarios.iterator();
-         Usuario usuarioBuffer;
-        
-            while (this.iterator.hasNext()) {
-                usuarioBuffer= this.iterator.next();
-                if(usuarioBuffer.toString().equals(data)){
-                    return usuarioBuffer;
-                }
-                
-                
+
+        try {
+            if (data.equals(this.usuarioAtual.toString())) {
+                return this.usuarioAtual;
+            } else {
+                return null;
             }
-        return null;
-        
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Nao foi possivel recuperar dados do usuario");
+
+        }
+
     }
-    
+
     /**
-     * This method receives the email and the new user name,
-     * then it updates the object Usuario in the Set 
-     * listaDeUsuarios.
+     * This method receives the email and the new user name, then it updates the
+     * object Usuario in the Set listaDeUsuarios.
+     *
      * @param data
      * @return boolean
      */
     @Override
     public boolean update(String[] data) {
-       
-        this.iterator = this.listaDeUsuarios.iterator();
-         Usuario usuarioBuffer = retrieve(data[1]);
-         
-          if(delete(data[1])){
-              usuarioBuffer.setNome(data[0]);
-              create(usuarioBuffer);
-              return true;
-          }
-              return false;
-          
-        
-          
-                
-            
-    
+
+        try {
+            if (!(data[0].equals(this.usuarioAtual.toString())) && !(this.usuarioAtual.getNome().equals(data[1]))) {
+                this.usuarioAtual.setEmail(data[0]);
+                this.usuarioAtual.setNome(data[1]);
+            }
+            return true;
+
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Nao foi possivel atualizar dados do usuario");
+
+        }
+
     }
+
     /**
      * This method consists in delete an object Usuario if the exists
+     *
      * @param data
      * @return boolean
      */
     @Override
     public boolean delete(String data) {
-      this.iterator = this.listaDeUsuarios.iterator();
-        while (this.iterator.hasNext()) {
-            
-            
-                Usuario usuarioBuffer = iterator.next();
-       
-                
-                if (usuarioBuffer.toString().equals(data)) {
-                 
-                 
-                 
-                 return this.listaDeUsuarios.remove(usuarioBuffer);
-                }
-                
-           }
-        
-       return false;
+
+        try {
+            if (data.equals(this.usuarioAtual.toString())) {
+                this.usuarioAtual = null;
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Nao foi possivel recuperar dados do usuario");
+
+        }
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package br.unicamp.si400.crud;
 
+import br.unicamp.si400.excecao.ExceptionDefault;
+
 /**
  *
  * @author Kaulitz
@@ -14,25 +16,29 @@ public interface Crud {
      * 
      * @param data
      * @return 
+     * @throws br.unicamp.si400.excecao.ExceptionDefault 
      */
-    boolean create(String[] data);
+   public abstract boolean create(String[] data) throws ExceptionDefault;
     /**
      * 
      * @param data
      * @return 
+     * @throws br.unicamp.si400.excecao.ExceptionDefault 
      */
-    Object retrieve(String data);
+    public abstract Object retrieve(String data) throws ExceptionDefault;
     /**
      * 
      * @param data
      * @return 
+     * @throws br.unicamp.si400.excecao.ExceptionDefault 
      */
-    boolean update(String[] data);
+    public abstract boolean update(String[] data) throws ExceptionDefault;
     /**
      * 
      * @param data
      * @return boolean
+     * @throws br.unicamp.si400.excecao.ExceptionDefault
      */
-    boolean delete(String data);
+    public abstract boolean delete(String data) throws ExceptionDefault;
     
 }
