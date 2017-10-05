@@ -17,7 +17,7 @@ public class RendaMensal extends Valor {
     public RendaMensal(double numeroValor, String tipo, String mes, String ano) {
         super(numeroValor, tipo, mes, ano);
     }
-
+    
     
     
 }

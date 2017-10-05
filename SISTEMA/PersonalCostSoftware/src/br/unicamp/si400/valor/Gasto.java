@@ -29,7 +29,8 @@ public class Gasto extends Valor {
         this.dia = dia;
         this.hora = hora;
     }
-
+    
+   
     public String getFormaDePagamento() {
         return formaDePagamento;
     }
@@ -49,5 +50,6 @@ public class Gasto extends Valor {
     public String getHora() {
         return hora;
     }
+    
     
 }

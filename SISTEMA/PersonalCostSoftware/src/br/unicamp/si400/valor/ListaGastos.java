@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Kaulitz
  */
-public class ListaGastos implements Crud {
+public class ListaGastos extends ListaValor implements Crud {
 
     private TreeMap<String, ArrayList<Gasto>> listaGastos;
 
@@ -99,7 +99,7 @@ public class ListaGastos implements Crud {
         }
 
     }
-
+    @Override
     public double SomaValores(String ano) throws ExceptionDefault {
         try {
             TreeMap<String, ArrayList<Gasto>> mapBuffer = new TreeMap(this.listaGastos);
@@ -114,7 +114,8 @@ public class ListaGastos implements Crud {
             throw new ExceptionDefault("Dados incorretos");
         }
     }
-
+    
+    @Override
     public double SomaValores(String mes, String ano) throws ExceptionDefault {
         try {
             ArrayList<Gasto> arrayListBuffer = new ArrayList(this.listaGastos.get(mes));

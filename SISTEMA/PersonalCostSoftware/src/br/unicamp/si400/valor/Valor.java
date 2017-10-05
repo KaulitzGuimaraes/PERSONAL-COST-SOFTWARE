@@ -54,6 +54,10 @@ public abstract class Valor {
         return this.getTipo();
     
     }
+
+    public void setNumeroValor(double numeroValor) {
+        this.numeroValor = numeroValor;
+    }
     
     
 
