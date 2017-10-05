@@ -12,67 +12,49 @@ import java.time.format.DateTimeFormatter;
  * @author Kaulitz
  */
 public abstract class Valor {
+    
+  
 
     private double numeroValor;
 
 
-    private DateTimeFormatter data;
-
     private String tipo;
     
 
-    public Valor(double numeroValor, String tipo) {
+    private final String mes;
+
+    private final String ano;
+
+    public Valor(double numeroValor, String tipo, String mes, String ano) {
         this.numeroValor = numeroValor;
         this.tipo = tipo;
+        this.mes = mes;
+        this.ano = ano;
     }
 
-    /**
-     *Get the data
-     *
-     * @return current data
-     */
-    public DateTimeFormatter getData() {
-        return data;
-    }
-    /**
-     * Get the value of tipo
-     *
-     * @return the value of tipo
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * Set the value of tipo
-     *
-     * @param tipo new value of tipo
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    /**
-     * Get the value of numeroValor
-     *
-     * @return the value of numeroValor
-     */
     public double getNumeroValor() {
         return numeroValor;
     }
 
-    /**
-     * Set the value of numeroValor
-     *
-     * @param numeroValor new value of numeroValor
-     */
-    public void setNumeroValor(long numeroValor) {
-        this.numeroValor = numeroValor;
-
+    public String getTipo() {
+        return tipo;
     }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+
     @Override
     public String toString(){
         return this.getTipo();
+    
     }
+    
+    
 
 }

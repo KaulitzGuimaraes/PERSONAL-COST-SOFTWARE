@@ -21,9 +21,9 @@ public class Usuario {
 
     private Login login;
 
-    private RendaMensal rendaMensal;
+    private ListaRendaMensal listarendaMensal;
 
-    private ListaGastos listagastos = new ListaGastos();
+    private ListaGastos listagastos;
     
     /**
      * Get the value of gastos
@@ -37,20 +37,13 @@ public class Usuario {
     /**
      * Get the value of rendaMensal
      *
-     * @return the value of rendaMensal
-     */
-    public RendaMensal getRendaMensal() {
-        return rendaMensal;
+     * @return listaRendaMensal
+     * */
+    public ListaRendaMensal getRendaMensal() {
+        return listarendaMensal;
     }
 
-    /**
-     * Set the value of rendaMensal
-     *
-     * @param rendaMensal new value of rendaMensal
-     */
-    public void setRendaMensal(RendaMensal rendaMensal) {
-        this.rendaMensal = rendaMensal;
-    }
+    
 
     /**
      * Get the object Login

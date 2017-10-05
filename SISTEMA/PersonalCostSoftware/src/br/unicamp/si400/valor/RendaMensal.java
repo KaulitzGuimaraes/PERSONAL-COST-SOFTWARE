@@ -13,23 +13,10 @@ package br.unicamp.si400.valor;
 
 
 public class RendaMensal extends Valor {
-    private final String mes;
 
-    /**
-     * Get the value of mes
-     *
-     * @return the value of mes
-     */
-    public String getMes() {
-        return mes;
+    public RendaMensal(double numeroValor, String tipo, String mes, String ano) {
+        super(numeroValor, tipo, mes, ano);
     }
-    public RendaMensal(long numeroValor, String tipo, String mes) {
-        super(numeroValor, tipo);
-        this.mes = mes;
-    }
-    
-   
-    
 
     
     

@@ -16,48 +16,18 @@ public class Gasto extends Valor {
     private final String local;
 
     private final String formaDePagamento;
+    
+    private final String dia;
+    
+    private final String hora;
 
-    private final String horaDoGasto;
-
-    private final String diaDoGasto;
-
-    private final String mesDoGasto;
-
-    private final String anoDoGasto;
-
-    /**
-     *
-     * @param descricao
-     * @param local
-     * @param formaDePagamento
-     * @param numeroValor
-     * @param tipo
-     */
-    Gasto(String descricao, String local, String formaDePagamento, String horaDoGasto, String diaDoGasto, String mesDoGasto, String anoDoGasto, double numeroValor, String tipo) {
-        super(numeroValor, tipo);
+    public Gasto(String descricao, String local, String formaDePagamento, double numeroValor, String tipo, String hora, String dia, String mes, String ano) {
+        super(numeroValor, tipo, mes, ano);
         this.descricao = descricao;
         this.local = local;
         this.formaDePagamento = formaDePagamento;
-        this.horaDoGasto = horaDoGasto;
-        this.diaDoGasto = diaDoGasto;
-        this.mesDoGasto = mesDoGasto;
-        this.anoDoGasto = anoDoGasto;
-    }
-
-    public String getHoraDoGasto() {
-        return horaDoGasto;
-    }
-
-    public String getDiaDoGasto() {
-        return diaDoGasto;
-    }
-
-    public String getMesDoGasto() {
-        return mesDoGasto;
-    }
-
-    public String getAnoDoGasto() {
-        return anoDoGasto;
+        this.dia = dia;
+        this.hora = hora;
     }
 
     public String getFormaDePagamento() {
@@ -72,4 +42,12 @@ public class Gasto extends Valor {
         return descricao;
     }
 
+    public String getDia() {
+        return dia;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+    
 }
