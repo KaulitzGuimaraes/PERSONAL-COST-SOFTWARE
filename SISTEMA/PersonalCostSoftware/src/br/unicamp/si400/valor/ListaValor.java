@@ -5,16 +5,16 @@
  */
 package br.unicamp.si400.valor;
 
-import br.unicamp.si400.excecao.ExceptionDefault;
+import br.unicamp.si400.crud.Crud;
+
 
 /**
  *
  * @author Kaulitz
  */
-public  abstract class ListaValor {
+public  abstract class ListaValor implements Crud {
     
-    public abstract double SomaValores(String ano) throws ExceptionDefault;
-    public abstract double SomaValores(String mes,String ano) throws ExceptionDefault;
+  
     
     
 }

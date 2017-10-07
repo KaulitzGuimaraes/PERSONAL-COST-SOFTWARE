@@ -6,6 +6,7 @@
 package br.unicamp.si400.usuario;
 
 import br.unicamp.si400.crud.Crud;
+import br.unicamp.si400.excecao.ExceptionDefault;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -29,12 +30,12 @@ public class UsuariosDoSistema implements Crud {
      * @return boolean
      */
     @Override
-    public boolean create(String[] data) {//Datas into the string must to be name and email
+    public boolean create(String[] data) throws ExceptionDefault {//Datas into the string must to be name and email
         try {
             this.usuarioAtual = new Usuario(data[0], data[1]);
             return true;
         } catch (NullPointerException e) {
-            throw new NullPointerException("Nao foi possivel criar o login");
+            throw new ExceptionDefault("Nao foi possivel criar o login");
 
         }
 
@@ -48,7 +49,7 @@ public class UsuariosDoSistema implements Crud {
      * @return Usuario
      */
     @Override
-    public Usuario retrieve(String data) {
+    public Usuario retrieve(String data) throws ExceptionDefault {
 
         try {
             if (data.equals(this.usuarioAtual.toString())) {
@@ -57,7 +58,7 @@ public class UsuariosDoSistema implements Crud {
                 return null;
             }
         } catch (NullPointerException e) {
-            throw new NullPointerException("Nao foi possivel recuperar dados do usuario");
+            throw new ExceptionDefault("Nao foi possivel recuperar dados do usuario");
 
         }
 
@@ -71,7 +72,7 @@ public class UsuariosDoSistema implements Crud {
      * @return boolean
      */
     @Override
-    public boolean update(String[] data) {
+    public boolean update(String[] data) throws ExceptionDefault {
 
         try {
             if (!(data[0].equals(this.usuarioAtual.toString())) && !(this.usuarioAtual.getNome().equals(data[1]))) {
@@ -81,7 +82,7 @@ public class UsuariosDoSistema implements Crud {
             return true;
 
         } catch (NullPointerException e) {
-            throw new NullPointerException("Nao foi possivel atualizar dados do usuario");
+            throw new ExceptionDefault("Nao foi possivel atualizar dados do usuario");
 
         }
 
@@ -94,7 +95,7 @@ public class UsuariosDoSistema implements Crud {
      * @return boolean
      */
     @Override
-    public boolean delete(String data) {
+    public boolean delete(String data) throws ExceptionDefault {
 
         try {
             if (data.equals(this.usuarioAtual.toString())) {
@@ -104,7 +105,7 @@ public class UsuariosDoSistema implements Crud {
                 return false;
             }
         } catch (NullPointerException e) {
-            throw new NullPointerException("Nao foi possivel recuperar dados do usuario");
+            throw new ExceptionDefault("Nao foi possivel recuperar dados do usuario");
 
         }
     }

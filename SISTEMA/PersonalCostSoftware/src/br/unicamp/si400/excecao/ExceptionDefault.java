@@ -5,6 +5,8 @@
  */
 package br.unicamp.si400.excecao;
 
+import javax.swing.JLabel;
+
 /**
  * 
  * @author Kaulitz
@@ -15,6 +17,8 @@ public class ExceptionDefault extends Exception{
      * @param mensagem 
      */
     public ExceptionDefault (String mensagem){
+        
         super(mensagem);
+        
     }
 }

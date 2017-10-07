@@ -11,41 +11,44 @@ package br.unicamp.si400.gestao;
  */
 public class GestaoPessoal {
 
-    private  Object resultado;
+    private  double resultado;
 
     public GestaoPessoal() {
         this.resultado = 0;
     }
 
-    public Double valorRestante(double minuendo, double subtraendo) {
+    public double valorRestante(double minuendo, double subtraendo) {
 
         this.resultado = (Double)minuendo - subtraendo;
 
-        return (Double) this.resultado;
+        return  this.resultado;
     }
     
-    public String valorRestantePorcentagem(double minuendo, double subtraendo) {
+    public double valorRestantePorcentagem(double minuendo, double subtraendo) {
 
-        this.resultado = (String)Double.toString((((minuendo - subtraendo)/minuendo)*100)) +"%";
+        this.resultado = ((minuendo - subtraendo)/minuendo)*100 ;
         
-        return (String) this.resultado;
+        return  this.resultado;
         
         
     }
     
-    public Double valorSomado(double minuendo, double subtraendo) {
-
-        this.resultado = minuendo + subtraendo;
-
+    public Double valorSomado(double data[]) {
+         double buffer =0;
+         
+       
+        
+         for (double el : data){
+            buffer += el;
+            
+        }
+          this.resultado =  buffer;
         return (Double) this.resultado;
     }
     
     public Double mediaValores(double[] data){
-        double buffer =0;
-        for (double el : data){
-            buffer += el;
-            
-        }
+        double buffer =valorSomado(data);
+       
         this.resultado = (Double) buffer/(data.length);
         return (Double) this.resultado;
         

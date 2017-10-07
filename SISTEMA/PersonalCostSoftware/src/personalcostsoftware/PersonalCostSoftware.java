@@ -6,6 +6,7 @@
 package personalcostsoftware;
 
 
+import br.unicamp.si400.excecao.ExceptionDefault;
 import br.unicamp.si400.usuario.*;
 
 /**
@@ -20,7 +21,7 @@ public class PersonalCostSoftware {
    
  
    
-    public void teste(){
+    public void teste() throws ExceptionDefault{
         UsuariosDoSistema u = new  UsuariosDoSistema();
         String[] dados = new String[2];
         dados[0]= "Kau";
@@ -30,7 +31,7 @@ public class PersonalCostSoftware {
     
         dados[0]= "Kau";
         dados[1]= "kaulitz@gmail";
-        u.create(dados);
+        //u.create(null);
         System.out.println("inseriu");
         
     
@@ -49,7 +50,7 @@ public class PersonalCostSoftware {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExceptionDefault {
 
         // TODO code application logic here
       

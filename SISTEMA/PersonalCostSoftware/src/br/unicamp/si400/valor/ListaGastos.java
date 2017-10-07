@@ -99,53 +99,7 @@ public class ListaGastos extends ListaValor implements Crud {
         }
 
     }
-    @Override
-    public double SomaValores(String ano) throws ExceptionDefault {
-        try {
-            TreeMap<String, ArrayList<Gasto>> mapBuffer = new TreeMap(this.listaGastos);
-            double result = 0;
-            Set<String> keys = mapBuffer.keySet();
-            for (String key : keys) {
-                result += SomaValores(key, ano);
-            }
-
-            return result;
-        } catch (NullPointerException e) {
-            throw new ExceptionDefault("Dados incorretos");
-        }
-    }
     
-    @Override
-    public double SomaValores(String mes, String ano) throws ExceptionDefault {
-        try {
-            ArrayList<Gasto> arrayListBuffer = new ArrayList(this.listaGastos.get(mes));
-            double result = 0;
-            for (Gasto el : arrayListBuffer) {
-                if (el.getMes().equals(mes) & el.getAno().equals(ano)) {
-                    result += el.getNumeroValor();
-                }
-            }
-
-            return result;
-        } catch (NullPointerException e) {
-            throw new ExceptionDefault("Dados incorretos");
-        }
-    }
-
-    public double SomaValores(String dia, String mes, String ano) throws ExceptionDefault {
-        try {
-            ArrayList<Gasto> arrayListBuffer = new ArrayList(this.listaGastos.get(mes));
-            double result = 0;
-            for (Gasto el : arrayListBuffer) {
-                if (el.getDia().equals(dia) & el.getMes().equals(mes) & el.getAno().equals(ano)) {
-                    result += el.getNumeroValor();
-                }
-            }
-            return result;
-        } catch (NullPointerException e) {
-            throw new ExceptionDefault("Dados incorretos");
-        }
-
-    }
+    
 
 }
