@@ -77,11 +77,10 @@ public class ListaRendaMensal extends ListaValor implements Crud {
 
         try {
             if (this.listaRendaMensal.containsKey(data[0])) {
-                ArrayList<RendaMensal> j = this.listaRendaMensal.get(data[0]);
-
-                for (RendaMensal el : j) {
-                    if (el.getMes().equals(data[0]) & el.getAno().equals(data[1])) {
-                        el.setNumeroValor(Double.parseDouble(data[2]));
+                Iterator <RendaMensal> iterator = this.listaRendaMensal.get(data[0]).iterator();
+                while (iterator.hasNext()) {
+                    if (iterator.next().getAno().equals(data[1]) & iterator.next().getMes().equals(data[0])) {
+                        iterator.next().setNumeroValor(Double.parseDouble(data[2]));
                         return true;
                     }
                 }
