@@ -41,7 +41,12 @@ public class ListaRendaMensal extends ListaValor implements Crud {
     public TreeMap<String, ArrayList<RendaMensal>> getListaRendaMensal() {
         return listaRendaMensal;
     }
-
+    /**
+     * 
+     * @param data
+     * @return
+     * @throws ExceptionDefault 
+     */
     @Override
     public boolean create(String[] data) throws ExceptionDefault {//double numeroValor, String tipo, String mes, String ano
         try {
@@ -56,7 +61,12 @@ public class ListaRendaMensal extends ListaValor implements Crud {
             throw new ExceptionDefault("Dados incorretos");
         }
     }
-
+    /**
+     * 
+     * @param data
+     * @return
+     * @throws ExceptionDefault 
+     */
     @Override
     public ArrayList<RendaMensal> retrieve(String data) throws ExceptionDefault {
         try {
@@ -71,7 +81,12 @@ public class ListaRendaMensal extends ListaValor implements Crud {
             throw new ExceptionDefault("Dados incorretos");
         }
     }
-
+    /**
+     * 
+     * @param data
+     * @return
+     * @throws ExceptionDefault 
+     */
     @Override
     public boolean update(String[] data) throws ExceptionDefault {
 
@@ -93,7 +108,12 @@ public class ListaRendaMensal extends ListaValor implements Crud {
         }
         return false;
     }
-
+    /**
+     * 
+     * @param data
+     * @return
+     * @throws ExceptionDefault 
+     */
     @Override
     public boolean delete(String data) throws ExceptionDefault {
         throw new UnsupportedOperationException("You can delete it!"); //To change body of generated methods, choose Tools | Templates.

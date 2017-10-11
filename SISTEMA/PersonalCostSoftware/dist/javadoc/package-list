@@ -1,5 +1,8 @@
 br.unicamp.si400.arquivo
 br.unicamp.si400.crud
+br.unicamp.si400.excecao
+br.unicamp.si400.gestao
+br.unicamp.si400.interfaces
 br.unicamp.si400.login
 br.unicamp.si400.usuario
 br.unicamp.si400.valor

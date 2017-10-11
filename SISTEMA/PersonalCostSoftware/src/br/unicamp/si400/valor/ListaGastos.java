@@ -45,7 +45,14 @@ public class ListaGastos extends ListaValor implements Crud {
         this.listaGastos.put("dezembro", (ArrayList<Gasto>) j.clone());
         
     }
-
+    /**
+     * This method receives a String array and 
+     *creates a new Gasto object, then this new object
+     * is placed in the class Map.
+     * @param data
+     * @return boolean
+     * @throws ExceptionDefault 
+     */
     @Override
     public boolean create(String[] data) throws ExceptionDefault {
 
@@ -59,7 +66,13 @@ public class ListaGastos extends ListaValor implements Crud {
             throw new ExceptionDefault("Não foi adicionar os gastos");
         }
     }
-
+    /**
+     * This method retrieves the Array list that corresponds
+     * to the key received.
+     * @param data
+     * @return ArrayList
+     * @throws ExceptionDefault 
+     */
     @Override
     public ArrayList retrieve(String data) throws ExceptionDefault {
         try {
@@ -70,16 +83,26 @@ public class ListaGastos extends ListaValor implements Crud {
         }
 
     }
-
+    /**
+     * This method is not supported. 
+     * @param data
+     * @return 
+     */
     @Override
     public boolean update(String[] data) {
         throw new UnsupportedOperationException("You can't update a cost"); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * This method clear the Array list that corresponds
+     * the key received.
+     * @param data
+     * @return boolean
+     * @throws ExceptionDefault 
+     */
     @Override
     public boolean delete(String data) throws ExceptionDefault {
         try {
-            this.listaGastos.remove(data);
+            this.listaGastos.get(data).clear();
             return true;
         } catch (NullPointerException e) {
 
@@ -88,7 +111,14 @@ public class ListaGastos extends ListaValor implements Crud {
         }
 
     }
-
+    /**
+     * delete a specific object Gasto that is 
+     * into the ArrayList at the specific key 
+     * received.
+     * @param data
+     * @return
+     * @throws ExceptionDefault 
+     */
     public boolean delete(String data[]) throws ExceptionDefault {
         try {//String descricao, String local, String formaDePagamento, String horaDoGasto, String diaDoGasto, String mesDoGasto, String anoDoGasto, long numeroValor, String tipo
             Gasto gastoBuffer = new Gasto(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4], data[5], data[6],
