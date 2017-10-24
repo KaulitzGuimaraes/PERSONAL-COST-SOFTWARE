@@ -17,14 +17,14 @@ public class Usuario {
 
     private String nome;
 
-    private  String email;
+    private String email;
 
     private Login login;
 
-    private ListaRendaMensal listarendaMensal;
+    private ListaRendaMensal listaRendaMensal;
 
     private ListaGastos listagastos;
-    
+
     /**
      * Get the value of gastos
      *
@@ -38,12 +38,11 @@ public class Usuario {
      * Get the value of rendaMensal
      *
      * @return listaRendaMensal
-     * */
+     *
+     */
     public ListaRendaMensal getRendaMensal() {
-        return listarendaMensal;
+        return listaRendaMensal;
     }
-
-    
 
     /**
      * Get the object Login
@@ -63,7 +62,8 @@ public class Usuario {
     public Usuario(String nome, String email) {
         this.nome = nome;
         this.email = email;
-        listagastos = new ListaGastos();
+        this.listagastos = new ListaGastos();
+        this.listaRendaMensal = new ListaRendaMensal();
     }
 
     /**
@@ -92,7 +92,8 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
-     /**
+
+    /**
      * Set email
      *
      * @param email
@@ -100,6 +101,7 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
     /**
      * Return the user email
      *
@@ -109,8 +111,7 @@ public class Usuario {
     public String toString() {
         return this.getEmail();
     }
-   
-    
+
     /**
      * Verify if the objects has the same email
      *
@@ -120,7 +121,11 @@ public class Usuario {
     @Override
     public boolean equals(Object anObject) {
         if (anObject == this) {
-            return true;
+            // typecast o to Complex so that we can compare data members 
+            String compare = anObject.toString();
+
+            // Compare the data members and return accordingly 
+            return this.toString().equals(compare);
         }
 
         /* Check if o is an instance of Usuario or not
@@ -128,18 +133,8 @@ public class Usuario {
         if (!(anObject instanceof Usuario)) {
             return false;
         }
+        return false;
 
-        // typecast o to Complex so that we can compare data members 
-        String compare = anObject.toString();
-
-        // Compare the data members and return accordingly 
-        return this.toString().equals(compare);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.email);
-        return hash;
-    }
 }

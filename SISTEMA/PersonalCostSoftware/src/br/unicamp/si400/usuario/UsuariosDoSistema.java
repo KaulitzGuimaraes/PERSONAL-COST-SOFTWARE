@@ -9,6 +9,7 @@ import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class UsuariosDoSistema implements Crud {
 
-    Usuario usuarioAtual;
+    List<Usuario> usuarioAtual;
 
     /**
      * This method consists in receive a string array that should has the user
@@ -32,7 +33,8 @@ public class UsuariosDoSistema implements Crud {
     @Override
     public boolean create(String[] data) throws ExceptionDefault {//Datas into the string must to be name and email
         try {
-            this.usuarioAtual = new Usuario(data[0], data[1]);
+            Usuario i = new Usuario(data[0], data[1]);
+            this.usuarioAtual.add(i);
             return true;
         } catch (NullPointerException e) {
             throw new ExceptionDefault("Nao foi possivel criar o login");
@@ -52,11 +54,12 @@ public class UsuariosDoSistema implements Crud {
     public Usuario retrieve(String data) throws ExceptionDefault {
 
         try {
-            if (data.equals(this.usuarioAtual.toString())) {
-                return this.usuarioAtual;
-            } else {
-                return null;
+            for (Usuario el : this.usuarioAtual) {
+                if (data.equals(this.usuarioAtual.toString())) {
+                    return el;
+                }
             }
+            return null;
         } catch (NullPointerException e) {
             throw new ExceptionDefault("Nao foi possivel recuperar dados do usuario");
 
@@ -75,16 +78,19 @@ public class UsuariosDoSistema implements Crud {
     public boolean update(String[] data) throws ExceptionDefault {
 
         try {
-            if (!(data[0].equals(this.usuarioAtual.toString())) && !(this.usuarioAtual.getNome().equals(data[1]))) {
-                this.usuarioAtual.setEmail(data[0]);
-                this.usuarioAtual.setNome(data[1]);
+               for (Usuario el : this.usuarioAtual) {
+                if (data[0].equals(this.usuarioAtual.toString())) {
+                    el.setEmail(data[0]);
+                    el.setNome(data[1]);
+                    return true;
+                }
             }
-            return true;
 
         } catch (NullPointerException e) {
             throw new ExceptionDefault("Nao foi possivel atualizar dados do usuario");
 
         }
+        return false;
 
     }
 
@@ -98,16 +104,17 @@ public class UsuariosDoSistema implements Crud {
     public boolean delete(String data) throws ExceptionDefault {
 
         try {
-            if (data.equals(this.usuarioAtual.toString())) {
-                this.usuarioAtual = null;
-                return true;
-            } else {
-                return false;
+           for (Usuario el : this.usuarioAtual) {
+                if (data.equals(this.usuarioAtual.toString())) {
+                    this.usuarioAtual.remove(el);
+                    return true;
+                }
             }
         } catch (NullPointerException e) {
             throw new ExceptionDefault("Nao foi possivel recuperar dados do usuario");
 
         }
+        return false;
     }
 
 }
