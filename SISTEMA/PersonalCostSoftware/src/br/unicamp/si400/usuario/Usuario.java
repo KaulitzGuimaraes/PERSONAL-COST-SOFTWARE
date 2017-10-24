@@ -121,21 +121,28 @@ public class Usuario implements Serializable {
      */
     @Override
     public boolean equals(Object anObject) {
-        if (anObject == this) {
-            // typecast o to Complex so that we can compare data members 
-            String compare = anObject.toString();
-
-            // Compare the data members and return accordingly 
-            return this.toString().equals(compare);
-        }
+      
 
         /* Check if o is an instance of Usuario or not
           "null instanceof [type]" also returns false */
         if (!(anObject instanceof Usuario)) {
             return false;
-        }
-        return false;
+        }  else   {
+            // typecast o to Complex so thsat we can compare data members 
+            Usuario compare = (Usuario) anObject;
 
+            // Compare the data members and return accordingly 
+            return this.toString().equals(compare.toString());
+        }
+      
+
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.email);
+        return hash;
     }
 
 }

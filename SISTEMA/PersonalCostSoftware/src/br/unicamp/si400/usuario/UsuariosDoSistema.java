@@ -22,11 +22,15 @@ import java.util.logging.Logger;
  */
 public class UsuariosDoSistema implements Crud,Serializable {
 
-    List<Usuario> usuarioAtual;
+    Set<Usuario> usuarioAtual;
 
     public UsuariosDoSistema() {
         
-        this.usuarioAtual = new ArrayList();
+        this.usuarioAtual =  new HashSet();
+    }
+
+    public Set<Usuario> getUsuarioAtual() {
+        return usuarioAtual;
     }
 
     
@@ -43,13 +47,17 @@ public class UsuariosDoSistema implements Crud,Serializable {
     public boolean create(String[] data) throws ExceptionDefault {//Datas into the string must to be name and email
         try {
             Usuario i = new Usuario(data[0], data[1]);
-            this.usuarioAtual.add(i);
-            return true;
+            if (!this.usuarioAtual.add(i)){
+                throw new ExceptionDefault("Nao foi possivel criar o login");
+                
+            }
+            
+           
         } catch (NullPointerException e) {
             throw new ExceptionDefault("Nao foi possivel criar o login");
 
         }
-
+        return true;
     }
 
     /**
@@ -125,5 +133,6 @@ public class UsuariosDoSistema implements Crud,Serializable {
         }
         return false;
     }
+    
 
 }

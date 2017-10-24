@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,9 +63,12 @@ public class ListaGastos extends ListaValor implements Serializable  {
     public boolean create(String[] data) throws ExceptionDefault {
 
         try {//String local, String formaDePagamento, double numeroValor, LocalDate data, LocalTime hora
-
-            Gasto gastoBuffer = new Gasto(data[0], data[1], data[3],Double.parseDouble(data[4]), LocalDate.parse(data[4].subSequence(0, data[4].length()-1)), LocalTime.parse(data[6].subSequence(0, data[6].length()-1)));
-            return this.listaGastos.get(LocalDate.parse(data[4].subSequence(0, data[4].length()-1)).getMonth()).add(gastoBuffer);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
+            LocalDate d = LocalDate.parse(data[5], format);
+            LocalTime t = LocalTime.parse(data[6], format1);
+            Gasto gastoBuffer = new Gasto(data[0], data[1], data[2], data[3], Double.parseDouble(data[4]),d,t );
+            return this.listaGastos.get(d.getMonth()).add(gastoBuffer);
             
           
         } catch (NullPointerException | NumberFormatException|DateTimeParseException   e) {
@@ -79,9 +83,11 @@ public class ListaGastos extends ListaValor implements Serializable  {
      * @throws ExceptionDefault 
      */
     @Override
-    public ArrayList retrieve(String data) throws ExceptionDefault {
+    public ArrayList<Gasto> retrieve(String data) throws ExceptionDefault {
         try {
-            return this.listaGastos.get(data);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate d = LocalDate.parse(data, format);
+            return this.listaGastos.get(d.getMonth());
         } catch (NullPointerException e) {
             throw new ExceptionDefault("Não foi recuperar os gastos");
 
@@ -126,9 +132,13 @@ public class ListaGastos extends ListaValor implements Serializable  {
      */
     public boolean delete(String data[]) throws ExceptionDefault {
         try {//String descricao, String local, String formaDePagamento, String horaDoGasto, String diaDoGasto, String mesDoGasto, String anoDoGasto, long numeroValor, String tipo
-            Gasto gastoBuffer = new Gasto(data[0], data[1], data[3],Double.parseDouble(data[4]), LocalDate.parse(data[4].subSequence(0, data[5].length()-1)), LocalTime.parse(data[6].subSequence(0, data[5].length()-1)));
             
-            return this.listaGastos.get(LocalDate.parse(data[4].subSequence(0, data[4].length()-1)).getMonth()).remove(gastoBuffer);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
+            LocalDate d = LocalDate.parse(data[5], format);
+            LocalTime t = LocalTime.parse(data[6], format1);
+            Gasto gastoBuffer = new Gasto(data[0], data[1], data[2],data[3],Double.parseDouble(data[4]),d,t);
+            return this.listaGastos.get(d.getMonth()).remove(gastoBuffer);
         } catch (NullPointerException | NumberFormatException | DateTimeParseException e) {
             throw new ExceptionDefault("Não foi deletar os gastos");
         }

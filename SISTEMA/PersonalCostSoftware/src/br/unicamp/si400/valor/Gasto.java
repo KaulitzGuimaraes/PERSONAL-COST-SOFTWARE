@@ -24,7 +24,7 @@ public class Gasto extends Valor {
     
     private final LocalTime hora; 
 
-    public Gasto(String descricao, String local, String formaDePagamento, double numeroValor, LocalDate data, LocalTime hora) {
+    public Gasto(String descricao, String local, String formaDePagamento, String tipo, double numeroValor, LocalDate data, LocalTime hora) {
         super(numeroValor, data);
         this.descricao = descricao;
         this.local = local;

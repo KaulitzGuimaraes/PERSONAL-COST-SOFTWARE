@@ -18,7 +18,7 @@ public class ExceptionDefault extends Exception{
      */
     public ExceptionDefault (String mensagem){
         
-        super(mensagem);
+        System.out.print(mensagem);
         
     }
 }
