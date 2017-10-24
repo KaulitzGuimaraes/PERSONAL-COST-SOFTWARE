@@ -7,6 +7,12 @@ package br.unicamp.si400.valor;
 
 import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -18,101 +24,105 @@ import java.util.TreeMap;
  */
 public class ListaRendaMensal extends ListaValor implements Crud {
 
-    private TreeMap<String, ArrayList<RendaMensal>> listaRendaMensal;
+    private TreeMap<Month, ArrayList<RendaMensal>> listaRendaMensal;
 
     public ListaRendaMensal() {
         this.listaRendaMensal = new TreeMap();
         ArrayList<RendaMensal> j = new ArrayList();
         this.listaRendaMensal = new TreeMap();
-        this.listaRendaMensal.put("janeiro", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("fevereiro", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("marco", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("abril", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("maio", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("junho", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("julho", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("agosto", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("setembro", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("outubro", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("novembro", (ArrayList<RendaMensal>) j.clone());
-        this.listaRendaMensal.put("dezembro", (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.JANUARY, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.FEBRUARY, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.MARCH, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.APRIL, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.MAY, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.JUNE, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.JULY, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.AUGUST, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.SEPTEMBER, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.OCTOBER, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.NOVEMBER, (ArrayList<RendaMensal>) j.clone());
+        this.listaRendaMensal.put(Month.DECEMBER, (ArrayList<RendaMensal>) j.clone());
     }
 
-    public TreeMap<String, ArrayList<RendaMensal>> getListaRendaMensal() {
-        return listaRendaMensal;
-    }
+   
+
     /**
-     * 
+     *
      * @param data
-     * @return
-     * @throws ExceptionDefault 
+     * @return boolean
+     * @throws ExceptionDefault
      */
     @Override
-    public boolean create(String[] data) throws ExceptionDefault {//double numeroValor, String tipo, String mes, String ano
+    public boolean create(String[] data) throws ExceptionDefault {//double numeroValor, String tipo, LocalDate
         try {
             if (data != null && this.listaRendaMensal.containsKey(data[2])) {
-                RendaMensal rendaMensalBuffer = new RendaMensal(Double.parseDouble(data[0]), data[1], data[2], data[3]);
-                this.listaRendaMensal.get(data[2]).add(rendaMensalBuffer);
+                RendaMensal rendaMensalBuffer = new RendaMensal(Double.parseDouble(data[0]), LocalDate.parse(data[1].subSequence(0,data[1].length()-1)));
+                this.listaRendaMensal.get(LocalDate.parse(data[1].subSequence(0,data[1].length()-1)).getMonth()).add(rendaMensalBuffer);
                 return true;
             } else {
                 throw new ExceptionDefault("Dados incorretos");
             }
-        } catch (NullPointerException | NumberFormatException e) {
+        } catch (NullPointerException | NumberFormatException | DateTimeParseException e) {
             throw new ExceptionDefault("Dados incorretos");
         }
     }
+
     /**
-     * 
+     *
      * @param data
      * @return
-     * @throws ExceptionDefault 
+     * @throws ExceptionDefault
      */
     @Override
     public ArrayList<RendaMensal> retrieve(String data) throws ExceptionDefault {
         try {
-            if (this.listaRendaMensal.containsKey(data)) {
-
+            if (this.listaRendaMensal.containsKey(LocalDate.parse(data.subSequence(0,data.length()-1)).getMonth())) {
+                
                 return this.listaRendaMensal.get(data);
-
+                
             } else {
-                throw new ExceptionDefault("Dados incorretos");
+                return null;
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | DateTimeParseException e) {
             throw new ExceptionDefault("Dados incorretos");
         }
     }
+
     /**
-     * 
+     *
      * @param data
      * @return
-     * @throws ExceptionDefault 
+     * @throws ExceptionDefault
      */
     @Override
     public boolean update(String[] data) throws ExceptionDefault {
 
         try {
-            if (this.listaRendaMensal.containsKey(data[0])) {
-                Iterator <RendaMensal> iterator = this.listaRendaMensal.get(data[0]).iterator();
-                while (iterator.hasNext()) {
-                    if (iterator.next().getAno().equals(data[1]) & iterator.next().getMes().equals(data[0])) {
-                        iterator.next().setNumeroValor(Double.parseDouble(data[2]));
-                        return true;
+            
+                for (RendaMensal el : this.listaRendaMensal.get(LocalDate.parse(data[1].subSequence(0,data[1].length()-1)).getMonth())) {
+                    if (LocalDate.parse(data[1].subSequence(0, data[1].length()-1)).getYear() == el.getData().getYear()){
+                        
+                        this.listaRendaMensal.get(LocalDate.parse(data[1].subSequence(0,data[1].length()-1)).getMonth()).remove(el);
+                        el.setNumeroValor(Double.parseDouble(data[0]));
+                         return this.listaRendaMensal.get(LocalDate.parse(data[1].subSequence(0,data[1].length()-1)).getMonth()).add(el);
+                       
+                    } else {
+                        
+                        return false;
                     }
                 }
-
-            } else {
-                throw new ExceptionDefault("Dados incorretos");
-            }
-        } catch (NullPointerException | NumberFormatException e) {
+               
+        } catch (NullPointerException | NumberFormatException | DateTimeParseException e) {
             throw new ExceptionDefault("Nao foi possivel atualizar a renda mensal");
         }
         return false;
     }
+
     /**
-     * 
+     *
      * @param data
      * @return
-     * @throws ExceptionDefault 
+     * @throws ExceptionDefault
      */
     @Override
     public boolean delete(String data) throws ExceptionDefault {

@@ -19,7 +19,7 @@ public class GestaoPessoal {
 
     public double valorRestante(double minuendo, double subtraendo) {
 
-        this.resultado = (Double)minuendo - subtraendo;
+        this.resultado = minuendo - subtraendo;
 
         return  this.resultado;
     }

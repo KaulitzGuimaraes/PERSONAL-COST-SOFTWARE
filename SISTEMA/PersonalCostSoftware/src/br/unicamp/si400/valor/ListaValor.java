@@ -14,7 +14,7 @@ import br.unicamp.si400.crud.Crud;
  */
 public  abstract class ListaValor implements Crud {
     
-  
+    
     
     
 }
