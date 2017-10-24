@@ -7,12 +7,13 @@ package br.unicamp.si400.login;
 
 import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
+import java.io.Serializable;
 
 /**
  *
  * @author Kaulitz
  */
-public class Login implements Crud {
+public class Login implements Crud, Serializable {
 
     private String senha;
     private final SimpleMd5Example criptogafiaMd5;

@@ -7,6 +7,8 @@ package br.unicamp.si400.usuario;
 
 import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -18,10 +20,17 @@ import java.util.logging.Logger;
  *
  * @author Kaulitz
  */
-public class UsuariosDoSistema implements Crud {
+public class UsuariosDoSistema implements Crud,Serializable {
 
     List<Usuario> usuarioAtual;
 
+    public UsuariosDoSistema() {
+        
+        this.usuarioAtual = new ArrayList();
+    }
+
+    
+    
     /**
      * This method consists in receive a string array that should has the user
      * name and email, then it will insert this values in the object Usuario and
@@ -55,7 +64,7 @@ public class UsuariosDoSistema implements Crud {
 
         try {
             for (Usuario el : this.usuarioAtual) {
-                if (data.equals(this.usuarioAtual.toString())) {
+                if (data.equals(el.getEmail())) {
                     return el;
                 }
             }

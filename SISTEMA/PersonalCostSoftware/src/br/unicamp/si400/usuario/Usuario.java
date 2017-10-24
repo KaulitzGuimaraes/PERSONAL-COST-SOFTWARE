@@ -7,13 +7,14 @@ package br.unicamp.si400.usuario;
 
 import br.unicamp.si400.login.Login;
 import br.unicamp.si400.valor.*;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Kaulitz
  */
-public class Usuario {
+public class Usuario implements Serializable {
 
     private String nome;
 

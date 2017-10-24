@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Kaulitz
  */
-public abstract class Valor {
+public abstract class Valor  {
 
     private double numeroValor;
 

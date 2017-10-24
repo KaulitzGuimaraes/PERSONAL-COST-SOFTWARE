@@ -6,13 +6,14 @@
 package br.unicamp.si400.valor;
 
 import br.unicamp.si400.crud.Crud;
+import java.io.Serializable;
 
 
 /**
  *
  * @author Kaulitz
  */
-public  abstract class ListaValor implements Crud {
+public  abstract class ListaValor implements Crud, Serializable {
     
     
     
