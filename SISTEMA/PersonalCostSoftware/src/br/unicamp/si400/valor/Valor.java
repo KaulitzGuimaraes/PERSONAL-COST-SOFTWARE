@@ -5,6 +5,7 @@
  */
 package br.unicamp.si400.valor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,11 +13,12 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Kaulitz
  */
-public abstract class Valor  {
+public abstract class Valor implements Serializable  {
 
     private double numeroValor;
 
     private LocalDate data;
+    
 
     public Valor(double numeroValor, LocalDate data) {
         this.numeroValor = numeroValor;

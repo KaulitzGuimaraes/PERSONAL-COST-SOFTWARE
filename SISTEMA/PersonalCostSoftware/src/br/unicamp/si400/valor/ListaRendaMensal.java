@@ -8,6 +8,7 @@ package br.unicamp.si400.valor;
 import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
@@ -22,7 +23,7 @@ import java.util.TreeMap;
  *
  * @author Kaulitz
  */
-public class ListaRendaMensal extends ListaValor implements Crud {
+public class ListaRendaMensal extends ListaValor implements Crud,Serializable {
 
     private TreeMap<Month, ArrayList<RendaMensal>> listaRendaMensal;
 
@@ -55,15 +56,17 @@ public class ListaRendaMensal extends ListaValor implements Crud {
     @Override
     public boolean create(String[] data) throws ExceptionDefault {//double numeroValor, String tipo, LocalDate
         try {
-            if (data != null && this.listaRendaMensal.containsKey(data[2])) {
-                RendaMensal rendaMensalBuffer = new RendaMensal(Double.parseDouble(data[0]), LocalDate.parse(data[1].subSequence(0,data[1].length()-1)));
-                this.listaRendaMensal.get(LocalDate.parse(data[1].subSequence(0,data[1].length()-1)).getMonth()).add(rendaMensalBuffer);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate d =  LocalDate.parse(data[1], format);
+            if (data != null &&  this.listaRendaMensal.containsKey(d.getMonth())) {
+                RendaMensal rendaMensalBuffer = new RendaMensal(Double.parseDouble(data[0]),d);
+                this.listaRendaMensal.get(d.getMonth()).add(rendaMensalBuffer);
                 return true;
             } else {
                 throw new ExceptionDefault("Dados incorretos");
             }
         } catch (NullPointerException | NumberFormatException | DateTimeParseException e) {
-            throw new ExceptionDefault("Dados incorretos");
+            throw new ExceptionDefault("Dados incorretos " +  e.getClass());
         }
     }
 
@@ -76,13 +79,12 @@ public class ListaRendaMensal extends ListaValor implements Crud {
     @Override
     public ArrayList<RendaMensal> retrieve(String data) throws ExceptionDefault {
         try {
-            if (this.listaRendaMensal.containsKey(LocalDate.parse(data.subSequence(0,data.length()-1)).getMonth())) {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate d = LocalDate.parse(data, format);
+            return this.listaRendaMensal.get(d.getMonth()) ;
                 
-                return this.listaRendaMensal.get(data);
                 
-            } else {
-                return null;
-            }
+          
         } catch (NullPointerException | DateTimeParseException e) {
             throw new ExceptionDefault("Dados incorretos");
         }

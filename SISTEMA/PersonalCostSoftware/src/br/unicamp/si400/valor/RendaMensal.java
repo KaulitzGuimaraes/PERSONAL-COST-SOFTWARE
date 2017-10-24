@@ -5,6 +5,7 @@
  */
 package br.unicamp.si400.valor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -14,7 +15,7 @@ import java.time.LocalDate;
  */
 
 
-public class RendaMensal extends Valor {
+public class RendaMensal extends Valor   {
 
     public RendaMensal(double numeroValor,LocalDate data) {
         super(numeroValor, data);

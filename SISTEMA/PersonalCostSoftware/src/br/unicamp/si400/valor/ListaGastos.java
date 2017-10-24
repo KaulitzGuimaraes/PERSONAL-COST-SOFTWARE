@@ -7,6 +7,7 @@ package br.unicamp.si400.valor;
 
 import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.LocalTime;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author Kaulitz
  */
-public class ListaGastos extends ListaValor  {
+public class ListaGastos extends ListaValor implements Serializable  {
 
     private  TreeMap<Month, ArrayList<Gasto>> listaGastos;
 

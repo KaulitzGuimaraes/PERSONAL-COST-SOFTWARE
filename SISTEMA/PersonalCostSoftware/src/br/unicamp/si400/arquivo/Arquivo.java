@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class Arquivo {
 
     private static final Logger LOG = Logger.getLogger(Arquivo.class.getName());
-    private final String SERIAL_FILENAME = "teste.dat" ;
+    private final String SERIAL_FILENAME = "arch.dat" ;
     private final Path serizableArchive;
 
     public Arquivo() {
