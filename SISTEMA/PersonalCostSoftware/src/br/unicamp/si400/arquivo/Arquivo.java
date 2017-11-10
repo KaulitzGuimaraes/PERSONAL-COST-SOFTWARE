@@ -53,7 +53,7 @@ public class Arquivo {
         try {
            Files.delete(serizableArchive);
         } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "save", ex);
+            LOG.log(Level.SEVERE, "delete", ex);
         }
     }
     private <T> T loadSerialized(T classe) {

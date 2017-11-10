@@ -28,6 +28,18 @@ public class Login implements Crud, Serializable {
 
     }
 
+    public void setPerguntaSecreta(String perguntaSecreta) {
+        this.perguntaSecreta = perguntaSecreta;
+    }
+
+    public void setRespostaSecreta(String respostaSecreta) throws ExceptionDefault {
+        this.respostaSecreta  = criptogafiaMd5.cripitografarSenha(respostaSecreta);
+        if (this.respostaSecreta  == null) {
+            throw new ExceptionDefault("Senha Invalida");
+        }
+       
+    }
+    
     /**
      * Get the value of senha
      *
