@@ -43,6 +43,7 @@ public class ListaRendaMensal extends ListaValor implements Crud,Serializable {
         this.listaRendaMensal.put(Month.OCTOBER, (ArrayList<RendaMensal>) j.clone());
         this.listaRendaMensal.put(Month.NOVEMBER, (ArrayList<RendaMensal>) j.clone());
         this.listaRendaMensal.put(Month.DECEMBER, (ArrayList<RendaMensal>) j.clone());
+        
     }
 
    

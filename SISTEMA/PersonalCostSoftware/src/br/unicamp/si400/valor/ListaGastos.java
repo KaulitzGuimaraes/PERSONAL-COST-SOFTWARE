@@ -85,9 +85,9 @@ public class ListaGastos extends ListaValor implements Serializable  {
     @Override
     public ArrayList<Gasto> retrieve(String data) throws ExceptionDefault {
         try {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate d = LocalDate.parse(data, format);
-            return this.listaGastos.get(d.getMonth());
+           
+            
+            return this.listaGastos.get(Month.valueOf(data));
         } catch (NullPointerException e) {
             throw new ExceptionDefault("Não foi recuperar os gastos");
 
@@ -145,6 +145,8 @@ public class ListaGastos extends ListaValor implements Serializable  {
 
     }
     
-    
+    public boolean isListEmpty(){
+        return this.listaGastos.isEmpty();
+    }
 
 }

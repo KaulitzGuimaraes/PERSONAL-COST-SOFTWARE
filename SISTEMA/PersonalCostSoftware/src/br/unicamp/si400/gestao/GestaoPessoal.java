@@ -47,9 +47,9 @@ public class GestaoPessoal {
     }
     
     public Double mediaValores(double[] data){
-        double buffer =valorSomado(data);
+        
        
-        this.resultado = (Double) buffer/(data.length);
+        this.resultado = data[0]/(data[1]);
         return (Double) this.resultado;
         
     }

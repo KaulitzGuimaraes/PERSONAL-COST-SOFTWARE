@@ -5,6 +5,7 @@
  */
 package br.unicamp.si400.login;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -12,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Lokesh Gupta
  */
-public class SimpleMd5Example {
+public class SimpleMd5Example implements Serializable {
 
     private String senhaCriptografada;
 

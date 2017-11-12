@@ -7,6 +7,7 @@ package br.unicamp.si400.usuario;
 
 import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
+import br.unicamp.si400.login.Login;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,8 +48,9 @@ public class UsuariosDoSistema implements Crud,Serializable {
     public boolean create(String[] data) throws ExceptionDefault {//Datas into the string must to be name and email
         try {
             Usuario i = new Usuario(data[0], data[1]);
+           
             if (!this.usuarioAtual.add(i)){
-                throw new ExceptionDefault("Nao foi possivel criar o login");
+                return false;
                 
             }
             

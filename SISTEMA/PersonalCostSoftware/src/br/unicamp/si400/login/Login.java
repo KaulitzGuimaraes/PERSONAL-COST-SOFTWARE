@@ -17,7 +17,7 @@ public class Login implements Crud, Serializable {
 
     private String senha;
     private final SimpleMd5Example criptogafiaMd5;
-    private String  perguntaSecreta; 
+    private String perguntaSecreta;
     private String respostaSecreta;
 
     /**
@@ -33,18 +33,18 @@ public class Login implements Crud, Serializable {
     }
 
     public void setRespostaSecreta(String respostaSecreta) throws ExceptionDefault {
-        this.respostaSecreta  = criptogafiaMd5.cripitografarSenha(respostaSecreta);
-        if (this.respostaSecreta  == null) {
+        this.respostaSecreta = criptogafiaMd5.cripitografarSenha(respostaSecreta);
+        if (this.respostaSecreta == null) {
             throw new ExceptionDefault("Senha Invalida");
         }
-       
+
     }
-    
+
     /**
      * Get the value of senha
      *
      * @return the value of senha
-     * @throws  ExceptionDefault
+     * @throws ExceptionDefault
      */
     private String getSenha() {
         return this.senha;
@@ -54,7 +54,7 @@ public class Login implements Crud, Serializable {
      * Set the value of senha
      *
      * @param senha new value of senha
-     * @throws  ExceptionDefault
+     * @throws ExceptionDefault
      */
     private void setSenha(String senha) throws ExceptionDefault {
         this.senha = criptogafiaMd5.cripitografarSenha(senha);
@@ -67,19 +67,20 @@ public class Login implements Crud, Serializable {
         return perguntaSecreta;
     }
 
-    public String getRespostaSecreta() {
-        return respostaSecreta;
+    public boolean getRespostaSecreta(String question) {
+        String verifyQuestion = criptogafiaMd5.cripitografarSenha(question);
+        return this.respostaSecreta.equals(verifyQuestion);
     }
 
-    
     /**
      * Returns the new temporary password to be changed by the user.
      *
      * @return String
-     * @throws  ExceptionDefault
+     * @throws ExceptionDefault
      */
     public String esqueceuSenha() throws ExceptionDefault {
         String novaSenha = gerarNovaSenha();
+        this.setSenha(novaSenha);
         if (novaSenha == null) {
             throw new ExceptionDefault("Senha Invalida");
         }
@@ -96,59 +97,56 @@ public class Login implements Crud, Serializable {
         for (int i = 0; i < 4; i++) {
             Integer intBuffer = (int) (Math.random() * 9);
             novaSenha = novaSenha + intBuffer.toString();
-            System.out.println(novaSenha);
+
         }
         return novaSenha;
     }
+
     /**
-     *  Return a canonical string using the String method internal().
-     * 
+     * Return a canonical string using the String method internal().
+     *
      * @param el
      * @return String
      */
-    private static String canonicString(String el){
+    private static String canonicString(String el) {
         return el.intern();
     }
+
     /**
-     * Verify whether the sended answer is equal the 
-     * user answer, returns true whether is yes and false
-     * whether is not.
-     * 
+     * Verify whether the sended answer is equal the user answer, returns true
+     * whether is yes and false whether is not.
+     *
      * @param data
-     * @return 
+     * @return
      */
-    public boolean verifyAnswer(String data ){
-        
+    public boolean verifyAnswer(String data) {
+
         return this.respostaSecreta.equals(canonicString(data));
     }
 
     /**
-     * Creates a password if this one is greater than 4 characters
-     *and set the question and answer for security.
-     * 
+     * Creates a cripto password and set the question and answer for security.
+     *
      * @param data
      * @return boolean
-     * @throws  ExceptionDefault
+     * @throws ExceptionDefault
      */
     @Override
     public boolean create(String[] data) throws ExceptionDefault {
         try {
-            if (data[0].length() >= 4 && data != null) {
-                setSenha(data[0]);
-                this.perguntaSecreta = data[1];
-                this.respostaSecreta = canonicString(data[2]);
-                return true;
-            }else{
-                throw new ExceptionDefault("Verifique se a senha possui 4 caracteres "
-                +"n"+ "e se todos os campos estao preeenchidos");
-            }
+
+            setSenha(data[0]);
+            this.perguntaSecreta = data[1];
+            this.respostaSecreta = criptogafiaMd5.cripitografarSenha(data[2]);
+            return true;
+
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             throw new ExceptionDefault("Erro ao criar a senha");
 
         }
-        
+
     }
-    
+
     /**
      * Verify the password
      *
@@ -165,17 +163,17 @@ public class Login implements Crud, Serializable {
      * Change the password
      *
      * @param data
-     * @throws  ExceptionDefault
+     * @throws ExceptionDefault
      * @return boolean
      */
     @Override
     public boolean update(String[] data) throws ExceptionDefault {
-        try{
-        if (data[0] != null) {
-            setSenha(data[0]);
-            return true;
-        }
-        }catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
+        try {
+            if (data[0] != null) {
+                setSenha(data[0]);
+                return true;
+            }
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             throw new ExceptionDefault("Erro ao mudar a senha");
 
         }
@@ -187,12 +185,13 @@ public class Login implements Crud, Serializable {
      *
      * @param data
      * @return
-     * @throws  UnsupportedOperationException
+     * @throws UnsupportedOperationException
      */
     @Override
     public boolean delete(String data) {
         throw new UnsupportedOperationException("You can't delete a password"); //To change body of generated methods, choose Tools | Templates.
     }
+
     
-    
+
 }

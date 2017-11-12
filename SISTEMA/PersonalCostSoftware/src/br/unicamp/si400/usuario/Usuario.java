@@ -65,6 +65,7 @@ public class Usuario implements Serializable {
         this.email = email;
         this.listagastos = new ListaGastos();
         this.listaRendaMensal = new ListaRendaMensal();
+        this.login = new Login();
     }
 
     /**
