@@ -78,6 +78,7 @@ public class Control {
      * @param email
      * @param senha
      * @throws ExceptionDefault
+     * @throws java.io.IOException
      */
     public void loginUser(String email, char[] senha) throws ExceptionDefault, IOException {
         try {
@@ -169,17 +170,21 @@ public class Control {
 
     /**
      *
+     * @param email
      * @return
+     * @throws br.unicamp.si400.excecao.ExceptionDefault
      */
     public boolean checkUser(String email) throws ExceptionDefault {
         Usuario buffer = control().users.retrieve(email);
-        if (buffer != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return buffer != null;
     }
 
+    /**
+     *
+     * @param password
+     * @param confirmpassword
+     * @throws ExceptionDefault
+     */
     public void changePassword(char[] password, char[] confirmpassword) throws ExceptionDefault {
         String pass = String.valueOf(password);
         String cpass = String.valueOf(confirmpassword);
@@ -194,24 +199,55 @@ public class Control {
         }
     }
 
+    /**
+     *
+     * @return @throws ExceptionDefault
+     * @throws IOException
+     */
     public List<String> setInfoHome() throws ExceptionDefault, IOException {
         List<String> listInfo = new ArrayList();
         listInfo.add(totalCostMonth(LocalDate.now()));
         listInfo.add(totalCostYear(LocalDate.now()));
         listInfo.add(totalAverageMonth(LocalDate.now()));
         listInfo.add(totalAverageYear(LocalDate.now()));
-        listInfo.add(mostSCost(LocalDate.now(), loadList()));
+        listInfo.add(mostSCost(LocalDate.now(), loadListType()));
         return listInfo;
 
     }
 
-    public List<String> loadList() throws IOException {
-        File file = new File("TypeList.txt");
+    /**
+     *
+     * @return @throws IOException
+     */
+    public List<String> loadListType() throws IOException {
 
-        List<String> words = Files.readAllLines(file.toPath());
-        return words;
+        return loadList("TypeList.txt");
     }
 
+    /**
+     *
+     * @return @throws java.io.IOException
+     */
+    public List<String> loadListPayment() throws IOException {
+
+        return loadList("PaymentList.txt");
+    }
+
+    private List<String> loadList(String fileName) throws IOException {
+        File file = new File(fileName);
+
+        List<String> words = Files.readAllLines(file.toPath());
+
+        return words;
+
+    }
+
+    /**
+     *
+     * @param e
+     * @return
+     * @throws ExceptionDefault
+     */
     public String totalCostMonth(LocalDate e) throws ExceptionDefault {
         ListaGastos list = control().user.getGastos();
 
@@ -233,19 +269,19 @@ public class Control {
 
     private String totalCostYear(LocalDate e) throws ExceptionDefault {
         ArrayList<Double> list3 = new ArrayList();
-        for (Month n : Month.values()){
-             
+        for (Month n : Month.values()) {
+
             list3.add(Double.parseDouble(totalCostMonth(e.withMonth(n.getValue()))));
         }
-        
-        return  Double.toString(sumValues(list3));
+
+        return Double.toString(sumValues(list3));
 
     }
 
     private String mostSCost(LocalDate e, List<String> typeList) throws ExceptionDefault {
         ListaGastos list = control().user.getGastos();
         TreeMap<String, Integer> count = new TreeMap();
-        if (!list.isListEmpty()) {
+        if (!this.user.getGastos().isListEmpty()) {
             typeList.forEach((el) -> {
                 count.put(el, 0);
             });
@@ -266,9 +302,14 @@ public class Control {
                 l.add(count.get(el));
             }
             Collections.sort(l);
-            return Integer.toString(l.getFirst());
+            for (String el : count.keySet()) {
+                if (count.get(el).equals(l.getFirst())) {
+                    return el;
+                }
+            }
+            return "ø";
         } else {
-            return "Sem gastos";
+            return "ø";
         }
 
     }
@@ -287,7 +328,7 @@ public class Control {
         ArrayList<Double> list1 = getValuesOfAList(list.retrieve(e.getMonth().toString()));
         if (!list1.isEmpty()) {
             GestaoPessoal g = new GestaoPessoal();
-             return Double.toString(avg(list1));
+            return Double.toString(avg(list1));
         } else {
             return "0.0";
         }
@@ -295,24 +336,24 @@ public class Control {
     }
 
     private String totalAverageYear(LocalDate e) throws ExceptionDefault {
-         ArrayList<Double> list1 = new ArrayList();
+        ArrayList<Double> list1 = new ArrayList();
 
-        for ( Month n : Month.values()){
-            
+        for (Month n : Month.values()) {
+
             list1.add(Double.parseDouble(totalAverageMonth(e.withMonth(n.getValue()))));
         }
-      
-        
+
         return Double.toString(avg(list1));
     }
-    
-    private Double avg (ArrayList<Double> l){
+
+    private Double avg(ArrayList<Double> l) {
         double[] values = new double[2];
         values[0] = sumValues(l);
         values[1] = l.size();
         GestaoPessoal g = new GestaoPessoal();
         return (g.mediaValores(values));
     }
+
     private double sumValues(ArrayList<Double> dataValues) {
         double[] total = new double[dataValues.size()];
         for (int i = 0; i < total.length; i++) {
@@ -324,10 +365,18 @@ public class Control {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String showName() {
         return control.user.getNome();
     }
 
+    /**
+     *
+     * @return
+     */
     public String showDate() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateNow = LocalDate.now();

@@ -8,6 +8,7 @@ package br.unicamp.si400.interfaces;
 import br.unicamp.si400.controle.Control;
 import br.unicamp.si400.excecao.ExceptionDefault;
 import java.awt.CardLayout;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -351,6 +352,8 @@ public class Menu extends javax.swing.JFrame {
             try {
                 Control.control().loginUser(emailSi.getText(), passwordSi.getPassword());
             } catch (ExceptionDefault ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

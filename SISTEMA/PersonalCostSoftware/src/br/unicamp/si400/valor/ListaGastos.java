@@ -146,7 +146,13 @@ public class ListaGastos extends ListaValor implements Serializable  {
     }
     
     public boolean isListEmpty(){
-        return this.listaGastos.isEmpty();
+        for ( Month s : this.listaGastos.keySet()){
+            
+            if(!this.listaGastos.get(s).isEmpty()){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
