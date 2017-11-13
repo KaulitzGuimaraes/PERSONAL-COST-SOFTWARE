@@ -398,7 +398,7 @@ public class Control {
         ArrayList<Double> list1 = getValuesOfAList(list.retrieve(e.getMonth().toString()));
         if (!list1.isEmpty()) {
             GestaoPessoal g = new GestaoPessoal();
-            return Double.toString(avg(list1, e.getDayOfMonth()));
+            return Double.toString(avg(list1, e.getMonth().maxLength()));
         } else {
             return "0.0";
         }
@@ -414,15 +414,13 @@ public class Control {
      */
     private String totalAverageYear(LocalDate e) throws ExceptionDefault {
         ArrayList<Double> list1 = new ArrayList();
-
-        for (Month n : Month.values()) {
-
-            list1.add(Double.parseDouble(totalAverageMonth(e.withMonth(n.getValue()))));
-        }
+        String s = totalCostYear(e);
+        list1.add(Double.parseDouble(s));
+        
         NumberFormat formatter = new DecimalFormat("###.##");
-        String s = formatter.format(avg(list1, 12));
-        s = s.replace(",", ".");
-        return s;
+        String s1 = formatter.format(avg(list1, e.lengthOfYear()));
+        s1 = s1 .replace(",", ".");
+        return s1;
     }
 
     /**
