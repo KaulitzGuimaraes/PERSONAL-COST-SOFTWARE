@@ -49,7 +49,8 @@ public class ListaGastos extends ListaValor implements Serializable  {
      *creates a new Gasto object, then this new object
      * is placed in the class Map.
      * @param data
-     * @return boolean 
+     * @return boolean
+     * 
      */
     @Override
     public boolean create(String[] data) {

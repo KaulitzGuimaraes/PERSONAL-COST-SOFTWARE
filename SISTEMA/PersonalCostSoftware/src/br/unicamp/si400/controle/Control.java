@@ -49,7 +49,8 @@ public class Control {
     }
 
     /**
-     *Constructor Sigleton patter
+     * Constructor Sigleton patter
+     *
      * @return
      */
     public static Control control() {
@@ -60,7 +61,8 @@ public class Control {
     }
 
     /**
-     *Load fata from a archive
+     * Load fata from a archive
+     *
      * @throws java.io.IOException
      */
     public void loadData() throws IOException {
@@ -71,15 +73,16 @@ public class Control {
     }
 
     /**
-     *Save data in the archive
+     * Save data in the archive
      */
     public void saveData() {
         data.save(this.users);
     }
 
     /**
-     *Receive the email and the password, check if os compatible
-     * then effectives the login. If isn't compatible it shows a message.
+     * Receive the email and the password, check if os compatible then
+     * effectives the login. If isn't compatible it shows a message.
+     *
      * @param email
      * @param senha
      * @throws ExceptionDefault
@@ -105,7 +108,9 @@ public class Control {
     }
 
     /**
-     * Create a new user receiving the data. If isn't possible to create, it shows a message.
+     * Create a new user receiving the data. If isn't possible to create, it
+     * shows a message.
+     *
      * @param email
      * @param name
      * @param question
@@ -148,7 +153,9 @@ public class Control {
 
     /**
      *
-     * Switch the password if the user give the right secret answer for his question.
+     * Switch the password if the user give the right secret answer for his
+     * question.
+     *
      * @param email
      * @throws ExceptionDefault
      */
@@ -175,10 +182,9 @@ public class Control {
 
     }
 
-    
-
     /**
-     *Change  the user Password .
+     * Change the user Password .
+     *
      * @param password
      * @param confirmpassword
      * @throws ExceptionDefault
@@ -198,26 +204,39 @@ public class Control {
     }
 
     /**
-     * Load the  Info field from userMenu data .
+     * Load the Info field from userMenu data .
+     *
      * @return @throws ExceptionDefault
      * @throws IOException
      */
     public List<String> setInfoHome() throws ExceptionDefault, IOException {
         List<String> listInfo = new ArrayList();
-        listInfo.add(totalCostMonth(LocalDate.now()));
-        listInfo.add(totalCostYear(LocalDate.now()));
-        NumberFormat formatter = new DecimalFormat("###.##");
-        String s3 = totalAverageMonth(LocalDate.now());
-        s3 = s3.replace(",", ".");
-        listInfo.add(s3);
+
+        
+        listInfo.add(formatNumer(totalCostMonth(LocalDate.now())));
+        listInfo.add(formatNumer(totalCostYear(LocalDate.now())));
+        
+        listInfo.add(formatNumer(totalAverageMonth(LocalDate.now())));
         listInfo.add(totalAverageYear(LocalDate.now()));
         listInfo.add(mostSCost(LocalDate.now(), loadListType()));
         return listInfo;
 
     }
-
     /**
-     *Load a list of types from a file in txt
+     * Convert string to double
+     * @param v 
+     */
+    
+    private String formatNumer(String v){
+        NumberFormat formatter = new DecimalFormat("###.##");
+        String s3 ; 
+        s3 = formatter.format(Double.parseDouble(v));
+        s3 = s3.replace(",", ".");
+        return s3;
+    }
+    /**
+     * Load a list of types from a file in txt
+     *
      * @return @throws IOException
      */
     public List<String> loadListType() throws IOException {
@@ -226,18 +245,21 @@ public class Control {
     }
 
     /**
-     *Load a list of payments from a file in txt
+     * Load a list of payments from a file in txt
+     *
      * @return @throws java.io.IOException
      */
     public List<String> loadListPayment() throws IOException {
 
         return loadList("PaymentList.txt");
     }
+
     /**
      * load a list by a file name given.
+     *
      * @param fileName
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     private List<String> loadList(String fileName) throws IOException {
         File file = new File(fileName);
@@ -249,7 +271,8 @@ public class Control {
     }
 
     /**
-     *Calculate the total cost of an especific Month.
+     * Calculate the total cost of an especific Month.
+     *
      * @param e
      * @return
      * @throws ExceptionDefault
@@ -274,7 +297,8 @@ public class Control {
     }
 
     /**
-     *Calculate the total cost of an especific year.
+     * Calculate the total cost of an especific year.
+     *
      * @param e
      * @return
      * @throws ExceptionDefault
@@ -292,6 +316,7 @@ public class Control {
 
     /**
      * Look for the type cost that shows up the most.
+     *
      * @param e
      * @param typeList
      * @return
@@ -318,26 +343,23 @@ public class Control {
             }
 
             LinkedList<Integer> l = new LinkedList();
-            System.out.println( "\n");
+            System.out.println("\n");
             for (String el : count.keySet()) {
                 l.add(count.get(el));
-                System.out.println(el + " : "+  count.get(el)+ "\n");
-                        
+                System.out.println(el + " : " + count.get(el) + "\n");
+
             }
             Collections.sort(l);
-            System.out.println( "======================================\n");
-            for (int i = 0; i<l.size();i++) {
-                
-            System.out.println( i + " : " + l.get(i)+ "\n");
+            System.out.println("======================================\n");
+            for (int i = 0; i < l.size(); i++) {
+
+                System.out.println(i + " : " + l.get(i) + "\n");
             }
-       
-                
-                
-            
+
             for (String el : count.keySet()) {
-                
+
                 if (count.get(el).equals(l.getLast())) {
-                   
+
                     return el;
                 }
             }
@@ -349,7 +371,8 @@ public class Control {
     }
 
     /**
-     *get The Class Gasto values end pot into an ArrayList of Doubles.
+     * get The Class Gasto values end pot into an ArrayList of Doubles.
+     *
      * @param values
      * @return
      */
@@ -362,7 +385,8 @@ public class Control {
     }
 
     /**
-     *Calculate the the avarage costs of an especific Month.
+     * Calculate the the avarage costs of an especific Month.
+     *
      * @param e
      * @return
      * @throws ExceptionDefault
@@ -382,7 +406,8 @@ public class Control {
     }
 
     /**
-     *Calculate the the avarage costs of an especific year.
+     * Calculate the the avarage costs of an especific year.
+     *
      * @param e
      * @return
      * @throws ExceptionDefault
@@ -401,7 +426,8 @@ public class Control {
     }
 
     /**
-     *Calculate the the avarage of an ArrayList of doubles and a range given.
+     * Calculate the the avarage of an ArrayList of doubles and a range given.
+     *
      * @param l
      * @return
      */
@@ -415,6 +441,7 @@ public class Control {
 
     /**
      * Sum values of ArrayList of doubles.
+     *
      * @param dataValues
      * @return
      */
@@ -430,7 +457,8 @@ public class Control {
     }
 
     /**
-     *Show the userName.
+     * Show the userName.
+     *
      * @return
      */
     public String showName() {
@@ -438,7 +466,8 @@ public class Control {
     }
 
     /**
-     *Show the current Date.
+     * Show the current Date.
+     *
      * @return
      */
     public String showDate() {
@@ -447,20 +476,23 @@ public class Control {
         dateNow.format(format);
         return dateNow.toString();
     }
-/**
- * Insert costs in the  User List of costs by the given data. If is not possible, it shows a message.
- * @param descricao
- * @param local
- * @param formaDePagamento
- * @param tipo
- * @param numeroValor
- * @param data
- * @param hora
- * @throws ExceptionDefault
- * @throws IOException 
- */
+
+    /**
+     * Insert costs in the User List of costs by the given data. If is not
+     * possible, it shows a message.
+     *
+     * @param descricao
+     * @param local
+     * @param formaDePagamento
+     * @param tipo
+     * @param numeroValor
+     * @param data
+     * @param hora
+     * @throws ExceptionDefault
+     * @throws IOException
+     */
     public void insertCost(String descricao, String local, String formaDePagamento, String tipo, String numeroValor, String data, String hora) throws ExceptionDefault, IOException {
-        
+
         String[] dataCost = new String[7];
         dataCost[0] = descricao;
         dataCost[1] = local;
@@ -479,8 +511,11 @@ public class Control {
         }
 
     }
+
     /**
-     * Delete costs in the  User List of costs by the given data. If is not possible, it shows a message.
+     * Delete costs in the User List of costs by the given data. If is not
+     * possible, it shows a message.
+     *
      * @param descricao
      * @param local
      * @param formaDePagamento
@@ -489,7 +524,7 @@ public class Control {
      * @param data
      * @param hora
      * @throws ExceptionDefault
-     * @throws IOException 
+     * @throws IOException
      */
     public void deleteCost(String descricao, String local, String formaDePagamento, String tipo, String numeroValor, String data, String hora) throws ExceptionDefault, IOException {
 
@@ -510,15 +545,17 @@ public class Control {
         }
 
     }
-/**
- * Gives an array with the costs of the specif range of date given.
- * @param e
- * @param f
- * @return
- * @throws IOException
- * @throws ExceptionDefault 
- */
-    
+
+    /**
+     * Gives an array with the costs of the specif range of date given.
+     *
+     * @param e
+     * @param f
+     * @return
+     * @throws IOException
+     * @throws ExceptionDefault
+     */
+
     public String[][] showListGastos(String e, String f) throws IOException, ExceptionDefault {
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -536,10 +573,12 @@ public class Control {
         }
         return null;
     }
-/**
- * Return an array with the header for the MenuUsuario table.
- * @return 
- */
+
+    /**
+     * Return an array with the header for the MenuUsuario table.
+     *
+     * @return
+     */
     public String[] titleGastos() {
         //String descricao, String local, String formaDePagamento, String tipo, String numeroValor, String data, String hora
         String[] n = {"Descrição", "Local", "Forma pg", "Tipo", "Valor", "Data", "Hora"};
@@ -583,12 +622,14 @@ public class Control {
         return array1;
 
     }
+
     /**
-     * Return an array of  Gasto values in an specific date range.
+     * Return an array of Gasto values in an specific date range.
+     *
      * @param e
      * @param f
      * @return
-     * @throws ExceptionDefault 
+     * @throws ExceptionDefault
      */
     private ArrayList<Double> listViewTable(LocalDate e, LocalDate f) throws ExceptionDefault {
         String[][] list = listTableGastos(e, f);
@@ -600,13 +641,16 @@ public class Control {
         }
         return list2;
     }
+
     /**
-     * Return the  Total of costs,cost sum and   average cost into an array of String.
+     * Return the Total of costs,cost sum and average cost into an array of
+     * String.
+     *
      * @param e
      * @param f
      * @return
      * @throws ExceptionDefault
-     * @throws IOException 
+     * @throws IOException
      */
     public String[] sapCosts(String e, String f) throws ExceptionDefault, IOException {
         try {

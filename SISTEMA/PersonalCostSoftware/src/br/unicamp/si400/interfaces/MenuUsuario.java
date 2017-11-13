@@ -8,6 +8,8 @@ package br.unicamp.si400.interfaces;
 import br.unicamp.si400.controle.Control;
 import br.unicamp.si400.excecao.ExceptionDefault;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -499,6 +501,11 @@ public class MenuUsuario extends javax.swing.JFrame {
         ));
         jTable1.setDropMode(javax.swing.DropMode.ON);
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel22.setText("developed by Kaulitz");
@@ -753,17 +760,30 @@ public class MenuUsuario extends javax.swing.JFrame {
     private void showTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showTableBtnActionPerformed
         try {
             // TODO add your handling code here:
-            if(date1V.getText().isEmpty() | date2V.getText().isEmpty()){
+            if (date1V.getText().isEmpty() | date2V.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Preencha os dois campos");
-            }else{
-            jTable1.removeAll();
-            setTable(date1V.getText(),date2V.getText());
-            startViewTab();
+            } else {
+                jTable1.removeAll();
+                setTable(date1V.getText(), date2V.getText());
+                startViewTab();
             }
         } catch (IOException | ExceptionDefault ex) {
             Logger.getLogger(MenuUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_showTableBtnActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+
+        int row = jTable1.getSelectedRow();
+        String value;
+        String[] val = new String[7];
+        for (int i = 0; i < val.length; i++) {
+            value = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), i).toString();
+            val[i] = value;
+        }
+        setValuesCost(val);
+    }//GEN-LAST:event_jTable1MouseClicked
     private void startMenus() throws ExceptionDefault, IOException {
 
         helloMsg.setText("Olá, " + Control.control().showName());
@@ -776,16 +796,15 @@ public class MenuUsuario extends javax.swing.JFrame {
         types.setText(list.get(4));
 
     }
-     private void startViewTab() throws ExceptionDefault, IOException {
-       String[] list = Control.control().sapCosts(date1V.getText(), date2V.getText());
-        
+
+    private void startViewTab() throws ExceptionDefault, IOException {
+        String[] list = Control.control().sapCosts(date1V.getText(), date2V.getText());
+
         mouthCost1.setText(list[0]);
         avarageCost3.setText(list[1]);
         avarageCost4.setText(list[2]);
-       
 
     }
-    
 
     public void startCombos() {
         typeComboBox.removeAllItems();
@@ -805,12 +824,28 @@ public class MenuUsuario extends javax.swing.JFrame {
             Logger.getLogger(MenuUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    void setTable(String d1, String d2) throws IOException, ExceptionDefault{
+
+    void setValuesCost(String[] a) {
+        descriptionField.setText(a[0]);
+        localField.setText(a[1]);
+        payComboBox.setSelectedItem(a[2]);
+        typeComboBox.setSelectedItem(a[3]);
+        valueField.setText(a[4]);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        LocalDate d = LocalDate.parse(a[5]);
+        String format1 = d.format(format);
+        date1Field.setText(format1);
+        hourField.setText(a[6]);
+    }
+
+    void setTable(String d1, String d2) throws IOException, ExceptionDefault {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String[][] data = Control.control().showListGastos(d1, d2);
-        model.setDataVector(data,Control.control().titleGastos());
+        model.setDataVector(data, Control.control().titleGastos());
     }
-        /**
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
