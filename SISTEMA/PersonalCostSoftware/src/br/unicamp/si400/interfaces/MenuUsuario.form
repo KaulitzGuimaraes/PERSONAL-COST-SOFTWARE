@@ -385,7 +385,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel13">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Media de gastos por m&#xea;s:"/>
+                        <Property name="text" type="java.lang.String" value="Media de gastos do m&#xea;s:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="averageCost1">
@@ -395,7 +395,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel14">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Media de gastos por ano:"/>
+                        <Property name="text" type="java.lang.String" value="Media de gastos do ano:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="averageCost2">

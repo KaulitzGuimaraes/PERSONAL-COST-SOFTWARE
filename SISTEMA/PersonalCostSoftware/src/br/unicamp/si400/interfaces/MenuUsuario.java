@@ -216,11 +216,11 @@ public class MenuUsuario extends javax.swing.JFrame {
 
         types.setText("jLabel6");
 
-        jLabel13.setText("Media de gastos por mês:");
+        jLabel13.setText("Media de gastos do mês:");
 
         averageCost1.setText("jLabel6");
 
-        jLabel14.setText("Media de gastos por ano:");
+        jLabel14.setText("Media de gastos do ano:");
 
         averageCost2.setText("jLabel6");
 

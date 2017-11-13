@@ -558,7 +558,7 @@ public class Control {
             LocalDate d2 = LocalDate.parse(f, format);
             if (d1.isAfter(d2)) {
                 JOptionPane.showMessageDialog(Menu.menu(), "Data 1 nõ pode ser posterior à data 2");
-            } else {
+            } else{
 
                 String[][] list1 = listTableGastos(d1, d2);
                 return list1;
