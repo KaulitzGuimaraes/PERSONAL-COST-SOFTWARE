@@ -30,8 +30,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     private MenuUsuario() throws ExceptionDefault, IOException {
         initComponents();
         tabsGU();
-        startMenus();
-        startCombos();
+        
     }
 
     public static MenuUsuario menuUsuario() throws ExceptionDefault, IOException {
@@ -39,7 +38,12 @@ public class MenuUsuario extends javax.swing.JFrame {
         if (menuUsuario == null) {
             menuUsuario = new MenuUsuario();
         }
+       
         return menuUsuario;
+    }
+    public void init() throws ExceptionDefault, IOException{
+         startMenus();
+        startCombos();
     }
 
     /**
@@ -268,6 +272,11 @@ public class MenuUsuario extends javax.swing.JFrame {
         );
 
         jButton2.setText("sair");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("developed by Kaulitz");
 
@@ -784,6 +793,16 @@ public class MenuUsuario extends javax.swing.JFrame {
         }
         setValuesCost(val);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            // TODO add your handling code here:
+            Control.control().signOut();
+            
+        } catch (ExceptionDefault | IOException ex) {
+            Logger.getLogger(MenuUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
     private void startMenus() throws ExceptionDefault, IOException {
 
         helloMsg.setText("Olá, " + Control.control().showName());

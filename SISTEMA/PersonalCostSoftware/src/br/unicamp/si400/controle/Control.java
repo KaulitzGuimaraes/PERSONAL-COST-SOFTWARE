@@ -97,6 +97,7 @@ public class Control {
             } else {
                 JOptionPane.showMessageDialog(Menu.menu(), "Login Realizado com sucesso.");
                 Menu.menu().setVisible(false);
+                MenuUsuario.menuUsuario().init();
                 MenuUsuario.menuUsuario().setVisible(true);
 
             }
@@ -343,18 +344,14 @@ public class Control {
             }
 
             LinkedList<Integer> l = new LinkedList();
-            System.out.println("\n");
+          
             for (String el : count.keySet()) {
                 l.add(count.get(el));
-                System.out.println(el + " : " + count.get(el) + "\n");
+               
 
             }
             Collections.sort(l);
-            System.out.println("======================================\n");
-            for (int i = 0; i < l.size(); i++) {
-
-                System.out.println(i + " : " + l.get(i) + "\n");
-            }
+            
 
             for (String el : count.keySet()) {
 
@@ -674,5 +671,10 @@ public class Control {
             JOptionPane.showMessageDialog(Menu.menu(), "Data(s) incorreta(s)");
         }
         return null;
+    }
+    public void signOut() throws ExceptionDefault, IOException{
+        this.user = null;
+        MenuUsuario.menuUsuario().setVisible(false);
+        Menu.menu().setVisible(true);
     }
 }
