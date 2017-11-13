@@ -7,15 +7,9 @@ package br.unicamp.si400.usuario;
 
 import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
-import br.unicamp.si400.login.Login;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

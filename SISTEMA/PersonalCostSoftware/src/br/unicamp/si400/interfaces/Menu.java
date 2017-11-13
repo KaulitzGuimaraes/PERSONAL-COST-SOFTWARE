@@ -25,12 +25,12 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    private Menu() {
+    private Menu() throws IOException {
         initComponents();
         Control.control().loadData();
     }
 
-    public static Menu menu() {
+    public static Menu menu() throws IOException {
         if (menu == null) {
             menu = new Menu();
         }
@@ -351,9 +351,7 @@ public class Menu extends javax.swing.JFrame {
         } else {
             try {
                 Control.control().loginUser(emailSi.getText(), passwordSi.getPassword());
-            } catch (ExceptionDefault ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
+            } catch (ExceptionDefault | IOException ex) {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -366,7 +364,7 @@ public class Menu extends javax.swing.JFrame {
         if (!emailSi.getText().isEmpty()) {
             try {
                 Control.control().forgotPassword(emailSi.getText());
-            } catch (ExceptionDefault ex) {
+            } catch (ExceptionDefault | IOException ex) {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -383,7 +381,7 @@ public class Menu extends javax.swing.JFrame {
         } else {
             try {
                 Control.control().newUser(emailSu1.getText(), nameSu.getText(), questionSu.getText(), aswSu.getText(), passwordSu1.getPassword(), confirmPasswordSu.getPassword());
-            } catch (ExceptionDefault ex) {
+            } catch (ExceptionDefault | IOException ex) {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -423,7 +421,11 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Menu.menu().setVisible(true);
+                try {
+                    Menu.menu().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             }
 

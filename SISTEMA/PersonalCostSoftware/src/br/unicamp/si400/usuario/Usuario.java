@@ -22,8 +22,6 @@ public class Usuario implements Serializable {
 
     private Login login;
 
-    private ListaRendaMensal listaRendaMensal;
-
     private ListaGastos listagastos;
 
     /**
@@ -33,16 +31,6 @@ public class Usuario implements Serializable {
      */
     public ListaGastos getGastos() {
         return this.listagastos;
-    }
-
-    /**
-     * Get the value of rendaMensal
-     *
-     * @return listaRendaMensal
-     *
-     */
-    public ListaRendaMensal getRendaMensal() {
-        return listaRendaMensal;
     }
 
     /**
@@ -64,7 +52,6 @@ public class Usuario implements Serializable {
         this.nome = nome;
         this.email = email;
         this.listagastos = new ListaGastos();
-        this.listaRendaMensal = new ListaRendaMensal();
         this.login = new Login();
     }
 
@@ -122,20 +109,19 @@ public class Usuario implements Serializable {
      */
     @Override
     public boolean equals(Object anObject) {
-      
+
 
         /* Check if o is an instance of Usuario or not
           "null instanceof [type]" also returns false */
         if (!(anObject instanceof Usuario)) {
             return false;
-        }  else   {
+        } else {
             // typecast o to Complex so thsat we can compare data members 
             Usuario compare = (Usuario) anObject;
 
             // Compare the data members and return accordingly 
             return this.toString().equals(compare.toString());
         }
-      
 
     }
 

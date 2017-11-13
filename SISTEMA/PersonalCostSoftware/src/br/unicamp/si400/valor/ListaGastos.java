@@ -5,7 +5,6 @@
  */
 package br.unicamp.si400.valor;
 
-import br.unicamp.si400.crud.Crud;
 import br.unicamp.si400.excecao.ExceptionDefault;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,14 +13,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.NavigableSet;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -56,11 +49,10 @@ public class ListaGastos extends ListaValor implements Serializable  {
      *creates a new Gasto object, then this new object
      * is placed in the class Map.
      * @param data
-     * @return boolean
-     * @throws ExceptionDefault 
+     * @return boolean 
      */
     @Override
-    public boolean create(String[] data) throws ExceptionDefault {
+    public boolean create(String[] data) {
 
         try {//String local, String formaDePagamento, double numeroValor, LocalDate data, LocalTime hora
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -72,7 +64,7 @@ public class ListaGastos extends ListaValor implements Serializable  {
             
           
         } catch (NullPointerException | NumberFormatException|DateTimeParseException   e) {
-            throw new ExceptionDefault("Não foi adicionar os gastos");
+             return false;
         }
     }
     /**
@@ -131,16 +123,26 @@ public class ListaGastos extends ListaValor implements Serializable  {
      * @throws ExceptionDefault 
      */
     public boolean delete(String data[]) throws ExceptionDefault {
-        try {//String descricao, String local, String formaDePagamento, String horaDoGasto, String diaDoGasto, String mesDoGasto, String anoDoGasto, long numeroValor, String tipo
+        try {//String descricao, String local, String formaDePagamento, String tipo, double numeroValor, LocalDate data, LocalTime hora
             
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
             LocalDate d = LocalDate.parse(data[5], format);
             LocalTime t = LocalTime.parse(data[6], format1);
             Gasto gastoBuffer = new Gasto(data[0], data[1], data[2],data[3],Double.parseDouble(data[4]),d,t);
-            return this.listaGastos.get(d.getMonth()).remove(gastoBuffer);
+            Iterator <Gasto> n = this.listaGastos.get(d.getMonth()).listIterator();
+            while(n.hasNext()){
+                 Gasto g = n.next();
+                if (g.getDescricao().equals(data[0]) & g.getLocal().equals(data[1]) &  g.getFormaDePagamento().equals(data[2]) & g.getTipo().equals(data[3])
+                  & g.getNumeroValor() == Double.parseDouble(data[4]) &  g.getData().equals(d) & g.getHora().equals(t)    ){
+                     n.remove();
+                     return true;
+                }
+           }
+            return false;
+           
         } catch (NullPointerException | NumberFormatException | DateTimeParseException e) {
-            throw new ExceptionDefault("Não foi deletar os gastos");
+           return false;
         }
 
     }

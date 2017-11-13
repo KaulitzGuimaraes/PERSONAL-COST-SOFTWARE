@@ -18,38 +18,59 @@ import java.util.logging.Logger;
  *
  * @author Kaulitz
  */
-public class Arquivo {
+public class Ar {
+        private static final Logger LOG = Logger.getLogger(Ar.class.getName());
+        private final String SERIAL_FILENAME = "arch.dat" ;
+        private final Path serizableArchive;
 
-    private static final Logger LOG = Logger.getLogger(Arquivo.class.getName());
-    private final String SERIAL_FILENAME = "arch.dat" ;
-    private final Path serizableArchive;
-
-    public Arquivo() {
+    /**
+     *
+     */
+    public Ar() {
         LOG.setLevel(Level.INFO);
-        
         
         this.serizableArchive = FileSystems.getDefault().getPath(SERIAL_FILENAME);
         
+        
     }
 
-    public <T> T load(T classe) {
+    /**
+     *
+     * @param <T>
+     * @param classe
+     * @return
+     * @throws IOException
+     */
+    public <T> T load(T classe) throws IOException {
         if (Files.exists(serizableArchive)) {
-            LOG.info("Usando " + serizableArchive.toString());
+           
+           LOG.info("Usando " + serizableArchive.toString());
             return loadSerialized(classe);
         } else {
             return null;
         }
+        
     }
+
+    /**
+     *
+     * @param <T>
+     * @param dados
+     */
     public <T> void save(T dados) {
         try {
             ObjectOutputStream os = new ObjectOutputStream(
-                    Files.newOutputStream(serizableArchive));
+             Files.newOutputStream(serizableArchive));
             os.writeObject(dados);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, "save", ex);
         }
     }
-       public  void delete () {
+
+    /**
+     *
+     */
+    public  void delete () {
         try {
            Files.delete(serizableArchive);
         } catch (IOException ex) {
@@ -61,7 +82,7 @@ public class Arquivo {
         
         try {
             fileStream = new ObjectInputStream(
-                    Files.newInputStream(serizableArchive));
+            Files.newInputStream(serizableArchive));
             
             classe = (T) fileStream.readObject();
             
@@ -71,5 +92,4 @@ public class Arquivo {
         }
         return classe;
     }
-
 }
