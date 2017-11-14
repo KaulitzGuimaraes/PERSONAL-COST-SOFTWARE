@@ -19,7 +19,7 @@ Restrições: restrições referentes à memória da máquina.
 
 ELICITAÇÃO DE REQUISITOS -  PERSONAL COST SOFTWARE (PCS)
 
-1. Armazenar a renda de cada mês;
+1. Armazenar os gastos de cada mês;
 
  Os gastos deverão ser divididos em:
 
