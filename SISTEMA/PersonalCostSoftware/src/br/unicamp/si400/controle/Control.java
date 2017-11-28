@@ -382,7 +382,7 @@ public class Control {
     }
 
     /**
-     * Calculate the the avarage costs of an especific Month.
+     * Calculate the the average costs of an specific Month.
      *
      * @param e
      * @return
@@ -403,7 +403,7 @@ public class Control {
     }
 
     /**
-     * Calculate the the avarage costs of an especific year.
+     * Calculate the the average costs of an specific year.
      *
      * @param e
      * @return
@@ -421,7 +421,7 @@ public class Control {
     }
 
     /**
-     * Calculate the the avarage of an ArrayList of doubles and a range given.
+     * Calculate the the average of an ArrayList of doubles and a range given.
      *
      * @param l
      * @return
@@ -542,7 +542,7 @@ public class Control {
     }
 
     /**
-     * Gives an array with the costs of the specif range of date given.
+     * Gives an array with the costs of the specific range of date given.
      *
      * @param e
      * @param f
